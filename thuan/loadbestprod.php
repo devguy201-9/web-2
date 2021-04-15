@@ -1,6 +1,6 @@
 <?php
     require_once('../utils/connect_db.php');	
-    ['findAllProductsNumb' => $arrayNumb] = require '../Model/product.php';
+    ['findAllProductsNumb' => $arrayNumb] = require '../Entities/product.php';
     $dataNumb = $arrayNumb($conn,8);
     require_once('../utils/close_db.php');
     $products = "<h2 class=\"title\">Best sellers</h2><div class=\"row2\" id=\"bestSeller\">";

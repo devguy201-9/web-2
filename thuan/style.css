@@ -34,7 +34,6 @@
 
 .fixed_header tr {
   transition: 0.1s;
-  cursor: pointer;
 }
 
 .fixed_header tr:hover {

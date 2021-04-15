@@ -86,7 +86,7 @@
                                 <select id="product_type" onchange="funcClickBtn()" name="typeId">
                                     <option selected value="">Product type</option>
                                     <?php
-				                ['findAllTypes' => $array] = require '../Model/category.php';
+				                ['findAllTypes' => $array] = require '../Entities/category.php';
 				                require_once('../utils/connect_db.php');
 				                $data = $array($conn);
 				                for($i=0;$i<count($data);$i++) {
@@ -115,7 +115,7 @@
                             event.preventDefault(); //prevent default action 
                             var post_url = $(this).attr("action"); //get form action url
                             // var request_method = $(this).attr("method"); //get form GET/POST method
-                            var form_data = $(this).serialize(); //Encode form elements for submission
+                            // var form_data = $(this).serialize(); //Encode form elements for submission
                             sessionStorage.setItem("inputSearch", $("#input").val());
                             sessionStorage.setItem("search_type", $("#search_type").val());
                             sessionStorage.setItem("product_type", $("#product_type").val());
@@ -228,7 +228,7 @@
                 $typePagination = $_GET["type"];
                 require_once('../utils/connect_db.php');    
                 if($typePagination == "all") {
-                        ['countProducts' => $counts] = require '../Model/product.php';
+                        ['countProducts' => $counts] = require '../Entities/product.php';
                         $maxItems = $counts($conn);
                         require_once('../utils/close_db.php');
                         $maxPage = 8;
@@ -259,7 +259,7 @@
                     if ($typePagination == "pants") {
                         $MaLoai = 2;
                     }
-                    ['countProductsByType' => $counts] = require '../Model/product.php';
+                    ['countProductsByType' => $counts] = require '../Entities/product.php';
                     $maxItems = $counts($conn,$MaLoai);
                     $maxPage = 8;
                     $totalPages = $maxItems/$maxPage;

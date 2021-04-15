@@ -6,10 +6,10 @@
 	settype ($page, "int");
 	$from = ($page - 1) * $maxPageItem;
 	
-    ['findTypeNameById' => $TenLoai] = require '../Model/category.php';
+    ['findTypeNameById' => $TenLoai] = require '../Entities/category.php';
 	$data1 = $TenLoai($conn,$typeID);
 
-    ['findProductByType' => $array] = require '../Model/product.php';
+    ['findProductByType' => $array] = require '../Entities/product.php';
 	$data = $array($conn,$typeID,$from,$maxPageItem);
 
     require_once('../utils/close_db.php');

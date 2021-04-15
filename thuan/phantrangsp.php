@@ -4,7 +4,7 @@
 	$maxPageItem = $_GET["maxPageItem"];
 	settype ($page, "int");
 	$from = ($page - 1) * $maxPageItem;
-	['findAllProducts' => $array] = require '../Model/product.php';
+	['findAllProducts' => $array] = require '../Entities/product.php';
 	$data = $array($conn,$from,$maxPageItem);
     require_once('../utils/close_db.php');
     $products = "";

@@ -10,7 +10,7 @@
             $typePrice = "<=";
         }
         require_once('../utils/connect_db.php');
-        ['SearchProducts' => $array] = require '../Model/product.php';
+        ['SearchProducts' => $array] = require '../Entities/product.php';
         $data = $array($conn,$inputSearch,$typePrice,1000000,$typeSearch);
         require_once('../utils/close_db.php');
         $products = "";

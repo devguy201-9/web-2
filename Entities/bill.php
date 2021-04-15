@@ -7,10 +7,16 @@
             while($row = mysqli_fetch_array($result)){
                 $data[] = $row;
             }
+            usort($data, function ($a, $b) {
+                return -strtotime($a['NGAYXUAT']) + strtotime($b['NGAYXUAT']);
+            });
             return $data;
         },
-        'findBillsByMAndY' => function($conn,$month,$year) {
+        'findBillsByMonthAndYearAndStatus' => function($conn,$month,$year,$status) {
             $query ="SELECT * FROM hoadon";
+            if ($status >=0 ){
+                $query = $query." WHERE TinhTrang = ".$status;
+            }
             $result = mysqli_query($conn,$query);
             $data = array();
             while($row = mysqli_fetch_array($result)){
@@ -22,34 +28,33 @@
             if($month == 0) {
                 $flag = true;
             }
-            foreach($data as $rs) {
-                if($flag) {
-                    if ($year == date("Y", strtotime($rs['NGAYXUAT']))) {
-                        $deleted = true;
+            if($year != 0) {
+                foreach($data as $rs) {
+                    if($flag) {
+                        if ($year == date("Y", strtotime($rs['NGAYXUAT']))) {
+                            $deleted = true;
+                        }
+                    } else {
+                        if ($month == date("m", strtotime($rs['NGAYXUAT'])) && $year == date("Y", strtotime($rs['NGAYXUAT']))) {
+                            $deleted = true;
+                        }
                     }
-                } else {
-                    if ($month == date("m", strtotime($rs['NGAYXUAT'])) && $year == date("Y", strtotime($rs['NGAYXUAT']))) {
-                        $deleted = true;
+                    if(!$deleted) {
+                        unset($data[$i]);
+                    } else {
+                        $deleted = false;
                     }
+                    $i++;
                 }
-                if(!$deleted) {
-                    unset($data[$i]);
-                } else {
-                    $deleted = false;
-                }
-                $i++;
             }
-            usort($data, function ($a, $b) {
-                return -strtotime($a['NGAYXUAT']) + strtotime($b['NGAYXUAT']);
-            });
-            return $data;
-        },
-        'findBillsByStatus' => function($conn,$status) {
-            $query ="SELECT * FROM hoadon WHERE TinhTrang = ".$status;
-            $result = mysqli_query($conn,$query);
-            $data = array();
-            while($row = mysqli_fetch_array($result)){
-                $data[] = $row;
+            if ($status < 0) {
+                usort($data, function ($a, $b) {
+                    return -strtotime($a['NGAYXUAT']) + strtotime($b['NGAYXUAT']);
+                });
+            } else {
+                usort($data, function ($a, $b) {
+                    return strtotime($a['NGAYXUAT']) - strtotime($b['NGAYXUAT']);
+                });
             }
             return $data;
         },
