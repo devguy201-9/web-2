@@ -21,6 +21,17 @@
             }
             return $data;
         },
+        'findProductById' => function($conn,$idprod) {
+            $query ="SELECT * FROM sanpham WHERE MaSP = ".$idprod;
+            $result = mysqli_query($conn,$query);
+            $data = array();
+            if ($result) {
+                while($row = mysqli_fetch_array($result)){
+                    $data[] = $row;
+                }
+            }
+            return $data[0];
+        },
         'countProducts' => function($conn) {
             $query ="SELECT COUNT(*) FROM sanpham";
             $result = mysqli_query($conn,$query);
@@ -62,6 +73,33 @@
                 $data[] = $row;
             }
             return $data;
+        },
+        'updateProduct' => function($conn,$products) {
+            $query ="UPDATE sanpham SET Ten = '".$products['Ten']."',Hinh = '".$products['Hinh']."',GiaBan = "
+            .$products['GiaBan'].",MaLoai = ".$products['MaLoai'].",SoLuongTon = ".$products['SoLuongTon']
+            ." WHERE MaSP = ".$products['MaSP'];
+            $result = mysqli_query($conn,$query);
+            if(!$result) {
+                return false;
+            }
+            return true;
+        },
+        'insertProduct' => function($conn,$products) {
+            $query ="INSERT INTO sanpham (Ten,Hinh,GiaBan,MaLoai,SoLuongTon) VALUES ('".$products['Ten']."','".$products['Hinh']."',"
+            .$products['GiaBan'].",".$products['MaLoai'].",".$products['SoLuongTon'].")";
+            $result = mysqli_query($conn,$query);
+            if(!$result) {
+                return false;
+            }
+            return true;
+        },
+        'deleteProduct' => function($conn,$MaSP) {
+            $query ="DELETE FROM sanpham WHERE MaSP = ".$MaSP;
+            $result = mysqli_query($conn,$query);
+            if(!$result) {
+                return false;
+            }
+            return true;
         },
     ];
 

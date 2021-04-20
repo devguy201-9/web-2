@@ -27,6 +27,6 @@
                 $temp = '';
             }
         }
-        echo($products);
+        echo $products;
     }
 ?>
