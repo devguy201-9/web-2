@@ -780,6 +780,7 @@ p
     color: #FF8C00;
     background: black;
     transition: 1s;
+	padding-left: 5px;
 }
 
 .DetailBtn:hover

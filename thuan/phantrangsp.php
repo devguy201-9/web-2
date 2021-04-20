@@ -15,7 +15,8 @@
         $price = intval($data[$i]['GiaBan']);
         $price1 =  number_format($price, 0, '', '.');
 
-        $temp = $temp.'<div class="col4" id="'.$data[$i]['MaSP'].'">'.'<img src="'.$data[$i]['Hinh'].'"><h4>'.$data[$i]['Ten'].'</h4><p>'.$price1.' VND'.'</p><button class="DetailBtn" id="'.$data[$i]['MaSP'].'"' . ' onclick="showProductDetail(this.id)">Details</button></div>';
+        $temp = $temp.'<div class="col4" id="'.$data[$i]['MaSP'].'">'.'<img src="'.$data[$i]['Hinh'].'"><h4>'.$data[$i]['Ten'].'</h4><p>'.$price1.' VND'
+        .'</p><a class="DetailBtn" href="detailProduct.php?idProduct='.$data[$i]['MaSP'].'" style="text-decoration: none;">Details</a></div>';
         if ($i + 1 != 0 && ($i + 1)%4 == 0 || $i == count($data)-1)
         {
             $products = $products.'<div class="row2" style="margin-top: 10%;margin-bottom: -12%">'.$temp.'</div>';
@@ -23,5 +24,5 @@
         }
         $i++;
     }
-    echo('<h2 class="title" style="margin-bottom:-90px">All products/page '.$page.'</h2>'.$products);
+    echo '<h2 class="title" style="margin-bottom:-90px">All products/page '.$page.'</h2>'.$products;
 ?>

@@ -276,7 +276,7 @@ function open_login_reg_form()
 	document.getElementById("account").style.display = "block";
 	document.getElementById("propagation").style.display = "none";
 	// document.getElementById("pagination").style.display = "none";
-	document.getElementById('product_detail').style.top = "-300%";
+	// document.getElementById('product_detail').style.top = "-300%";
 	var x = document.getElementById("home");
 	{
 		document.getElementById("home").style.height = "680px";
@@ -297,6 +297,14 @@ function close_login_reg_form()
 	{
 		document.getElementById("home").style.height = "100px";
 	}
+}
+
+function close_login_reg_form2()
+{
+	document.getElementById("account").style.display = "none";
+	document.getElementById("home").style.height = "760px";
+	document.getElementById("Endorser").style.display = "block";
+	document.getElementById("propagation").style.display = "block";
 }
 
 
@@ -572,6 +580,7 @@ function showProducts(){
 
 function openNav()
 {
+	document.getElementById("input").disabled = false;
 	document.getElementById("search").style.width = "100%";
 	//get data from sessionStorage to set value for form
 	if (sessionStorage.getItem("inputSearch") != "") {
@@ -588,6 +597,7 @@ function closeNav()
 	sessionStorage.removeItem('search_type');
 	sessionStorage.removeItem('product_type');
 	document.getElementById("search").style.width = "0%";
+	document.getElementById("input").disabled = true;
 }
 
 function quantitydown()
