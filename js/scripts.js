@@ -9,19 +9,19 @@ var num_shirt;
 var num_pant;
 var num;
 var mybutton = document.getElementById("BtnTop");
-// window.onscroll = function() {scrollFunction()};
+window.onscroll = function() {scrollFunction()};
 	
-// function scrollFunction() 
-// {
-// 	if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20)
-// 	{
-// 		mybutton.style.display = "block";
-// 	} 
-// 	else 
-// 	{
-// 		mybutton.style.display = "none";
-// 	}
-// }
+function scrollFunction() 
+{
+	if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20)
+	{
+		mybutton.style.display = "block";
+	} 
+	else 
+	{
+		mybutton.style.display = "none";
+	}
+}
 
 function topFunction() 
 {
@@ -29,8 +29,8 @@ function topFunction()
 		document.documentElement.scrollTop = 0;
 }
 
-// var MenuItems = document.getElementById("MenuItems");
-// MenuItems.style.maxHeight = "0px";
+var MenuItems = document.getElementById("MenuItems");
+MenuItems.style.maxHeight = "0px";
 
 function menutoggle()
 {
@@ -258,7 +258,7 @@ function Register()
 	register.style.transform = "translate(0px)";
 	login.style.transform = "translate(0px)";
 	indicator.style.transform = "translate(110px)";
-	form[0].style.height = "500px";
+	form[0].style.height = "450px";
 }
 
 function Login()
@@ -283,10 +283,13 @@ function open_login_reg_form()
 	}
 }
 
+var current_height = 0;
+
 function close_login_reg_form()
 {
 	document.getElementById("account").style.display = "none";
 	var x = document.getElementById("home");
+	console.log(x.offsetHeight, "\t", document.getElementById('bs&na').style.display);
 	if (x.offsetHeight == 680 && document.getElementById('bs&na').style.display != 'none')
 	{
 		document.getElementById("home").style.height = "760px";
@@ -295,6 +298,7 @@ function close_login_reg_form()
 	}
 	else
 	{
+		console.log("100px");
 		document.getElementById("home").style.height = "100px";
 	}
 }
@@ -1084,8 +1088,32 @@ function ClickBtnBill() {
 	document.getElementById("btnSubmitBill").click();
 }
 
+function ClickBtnBill2() {
+	if($("#monthBills2").val() != 0 && $("#yearBills2").val() == 0){
+		document.getElementById('btnConfirm').style="display: none";
+		document.getElementById('message-confirm').innerHTML="Please select the number of years !";
+		document.getElementById('btnConfirmNo').innerHTML="Close";
+		document.getElementById('btnpopupConfirm').click();
+		$("#monthBills2").val(0);
+		return;
+	}
+	document.getElementById("btnSubmitBill2").click();
+}
+
+function ClickBtnBill3() {
+	if($("#monthBills3").val() != 0 && $("#yearBills3").val() == 0){
+		document.getElementById('btnConfirm').style="display: none";
+		document.getElementById('message-confirm').innerHTML="Please select the number of years !";
+		document.getElementById('btnConfirmNo').innerHTML="Close";
+		document.getElementById('btnpopupConfirm').click();
+		$("#monthBills3").val(0);
+		return;
+	}
+	document.getElementById("btnSubmitBill3").click();
+}
+
 function funcAllBills(){
-	$("#statusBills").val('-1');
+	$("#statusBills").val('-2');
 	$("#monthBills").val('0');
 	$("#yearBills").val('0');
 	ClickBtnBill();

@@ -64,7 +64,7 @@ body
 .col2
 {
 	flex-basis: 50%;
-	min-width: 300px;
+	max-width: 600px;
 }
 
 .col2 h1
@@ -74,14 +74,14 @@ body
 	margin: 25px 0px;
 }
 
-.col-3
+.col3
 {
 	flex-basis: 30%;
 	min-width: 250px;
 	margin-bottom: 30px;
 }
 
-.col-3 img
+.col3 img
 {
 	width: 100%;
 }
@@ -97,6 +97,24 @@ body
     transition: transform 0.4s;
 }
 .col4 img
+ 
+{
+	transition: 0.4s;
+	box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.5);
+	width: 100%;
+}
+
+.col4v2
+ 
+{
+	flex-basis: 25%;
+    min-width: 250px;
+    padding-top: 18px;
+    padding-left: 40px;
+    margin-bottom: 50px;
+    transition: transform 0.4s;
+}
+.col4v2 img
  
 {
 	transition: 0.4s;
@@ -124,15 +142,15 @@ body
 	display: none;
 }
 
-.navbar .logo img
+.navbar .logo img 
 {
-	margin-left: -30px;
+    margin-left: -67px;
 }
 
 .col2 img
  
 {
-	max-width: 100%;
+	max-width: 110%;
 }
 
 .header .row
@@ -174,7 +192,7 @@ nav ul li
 
 nav ul li a:hover
 {
-	color: #fd5800;
+	color: #fd5800 !important;
 }
 
 a
@@ -299,33 +317,114 @@ a
 /* end search */
 
 /* responsive for header */
+
+@media only screen and (max-width: 1230px)
+{
+	.searchForm .closebtn
+	{
+		margin-top: 1.5%;
+	}
+	.row
+	{
+		margin-top: -20px;
+	}
+	.col2
+	{
+		flex-basis: 60%;
+		margin-top: -50px;
+	}
+
+	.col2 img
+	{
+		max-width: 95%;
+	}
+
+	.row2
+	{
+		margin-top: 2% !important;
+		margin-left: -15%;
+	}
+	.col4, .col4vs 
+	{
+		flex-basis: 36%;
+	}
+
+	.navbar .logo img
+	{
+		margin-left: 0;
+	}
+
+	.title
+	{
+		margin-bottom: 0 !important;
+	}
+
+}
+
 @media only screen and (max-width: 899px)
 {
+	.navbar .logo img
+	{
+		width: 300px;
+		margin-left: 0;
+	}
+}
+
+@media only screen and (max-width: 899px)
+{
+	.row2
+	{
+		margin-top: 15% !important;
+	}
+	.col4
+	{
+		flex-basis: 65%;
+    	margin-left: -8%;
+	}
+	.col4v2
+	{
+		margin-right: 198px !important;
+    	flex-basis: 64% !important;
+	}
+	
+	.row
+	{
+		margin-top: 0;
+	}
 	nav ul
 	{
-		position: absolute;
-	    top: 75px;
-	    margin-left: -9.5%;
-	    border-radius: 15px;
-	    width: 120px;
-	    overflow: hidden;
-	    transition: max-height 0.2s;
+		position: absolute !important;
+	    top: 75px !important;
+	    margin-left: -9.5% !important;
+	    border-radius: 15px !important;
+	    width: 120px !important;
+	    overflow: hidden !important;
+	    transition: max-height 0.2s !important;
 	}
 
 	nav ul li
 	{
-		display: block;
-	    width: 106px;
-	    background: #ff8c00;
-	    text-align: center;
-	    border: 3px solid black;
-	    border-radius: 5px;
+		display: block !important;
+	    width: 106px !important;
+	    background: #ff8c00 !important;
+	    text-align: center !important;
+	    border: 3px solid black !important;
+	    border-radius: 5px !important;
 	}
 
 	nav ul li:hover
 	{
-		border-radius: 5px;
-		background: black;
+		border-radius: 5px !important;
+		background: black !important;
+	}
+
+	#btnSubmit-pagination
+	{
+		visibility: hidden;
+	    opacity: 0;
+	    width: 0;
+	    height: 0;
+	    margin: -12px;
 	}
 
 	nav
@@ -338,31 +437,27 @@ a
 		color: #fd5800;
 	}
 
+	nav ul li form
+	{
+		margin-top: 0px;
+		height: 50px;
+
+	}
+
 	.menu-icon
 	{
 		display: block;
 		cursor: pointer;
-		margin-left: -20px;
 	}
+
 	.col2
- 
 	{
-		flex-basis: 100%;
+		flex-basis: 65%;
 	}
+
 	.col2 img
- 
 	{
-		max-width: 70%;
-	}
-
-	h2
-	{
-		margin-bottom: 50px;
-	}
-
-	.row2
-	{
-		margin-top: 22% !important;
+		max-width: 80%;
 	}
 }
 /* responsive for header */
@@ -379,14 +474,14 @@ a
 .btn:hover
 {
 	background: #2f4f4f;
-	color: #fd5800;
+	color: #fd5800 !important;
 }
 
 .form-container
 {
 	background: white;
 	width: 300px;
-	height: 500px;
+	height: 420px;
 	border: 5px solid orange;
 	border-radius: 20px;
 	position: relative;
@@ -439,7 +534,7 @@ form input:focus
 
 form a:hover
 {
-	color: #fd5800;
+	color: #fd5800 !important;
 }
 
 form .btn
@@ -579,11 +674,12 @@ p
 .website-features div p
 {
 	margin-bottom: 0px;
+	margin-left: -10px;
 }
 
 .website-features img
 {
-	width: 35%;
+	width: 40%;
 }
 /*end website-features*/
 
@@ -613,11 +709,16 @@ p
 	}
 }
 
+.disabled 
+{
+    pointer-events: none;
+    opacity: 0.3;
+}
+
 
 @media only screen and (max-width: 540px)
 {
-	.col-3, .col4
- 
+	.col3
 	{
 		flex-basis: 100%;
 	}
@@ -691,7 +792,7 @@ p
 	position: fixed;
 	bottom: 5px;
 	right: 5px;
-	z-index: 0;
+	z-index: 10;
 	font-size: 14px;
 	outline: none;
 	background-color: #FF8C00;
@@ -813,11 +914,11 @@ p
 
 .info
 {
-	margin-left: 15px;
-  	margin-top: 0%;
+	margin-left: -2px;
+    margin-top: 0%;
 }
 
-.productDetail .col-2 img
+.productDetail .col2 img
 {
 	margin-left: 2%;
 	margin-top: 2%;
@@ -895,7 +996,7 @@ p
 
 .addToCart a
 {
-	color: #ff8c00;
+	color: #ff8c00 !important;
     font-weight: bold;
     text-align: center;
     transition: 0.5s;
@@ -904,13 +1005,13 @@ p
 
 .addToCart a:hover
 {
-	color: black;
+	color: black !important;
 }
 
 .addToCart:hover
 {
-	background: #FF8C00;
-	color: black;
+	background: #FF8C00 !important;
+	color: black !important;
 }
 
 button:focus
@@ -961,7 +1062,7 @@ button:focus
 h2
 {
 	font-size: 30px;
-    margin-left: 1%;
+    margin-left: -0.5%;
     margin-top: -1%;
     color: #ff8c00;
 }

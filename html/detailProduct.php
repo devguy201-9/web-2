@@ -25,7 +25,7 @@
             <h2 style="margin-top: 0%; color: black">Your order <i class="fas fa-clipboard-list"></i></h2>
             <ul id="MyOrder" style="margin-left: 2%; margin-top: 1%; list-style-type: none;"></ul>
         </div>
-        <div class="header" id="home">
+        <div class="header" id="home" style="height: 100px">
             <div class="container">
                 <div class="navbar">
                     <div class="logo">
@@ -104,10 +104,8 @@
                                         <li><a title="search" onclick="openNav()"><i class="fas fa-search"></i></a></li>
                             <li id="acc"><a title="log in" onclick="open_login_reg_form()"><i
                                         class="fas fa-user"></i></a></li>
-                            <li id="admin" style="display:none;"><a title="Admin" href="adminPage.html"
-                                    onclick="gotoAdmin()"><i class="fas fa-users-cog"></i></a></li>
                             <li id="logOut" style="display:none;"><a title="log out" id="log_out"
-                                    onclick="logout()"></a></li>
+                                    onclick="log()"></a></li>
                         </ul>
                     </nav>
                     <span onclick="menutoggle()" class="menu-icon">&#9776</span>
@@ -115,21 +113,14 @@
                 </div>
 
                 <div class="row">
-                    <div class="col2" id="propagation">
-                        <h1>You only live once!</h1>
-                        <p>Just stay healthy, keep fit and enjoy this life</p>
-                        <a class="btn">EXPLORE &#10152;</a>
-                    </div>
-
-                    <div class="col2">
-                        <img src="..\image\endorser.png" id="Endorser">
-                    </div>
+                    <div class="col2" id="propagation"></div>
+                    <div class="col2" id="Endorser"></div>
                 </div>
             </div>
             <div class="login-page" id="account">
                 <div class="container">
                     <div class="row">
-                        <div class="col-3">
+                        <div class="col3">
                             <div class="form-container">
                                 <div class="form-btn">
                                     <span onclick="Login()">Log in</span>
@@ -140,20 +131,19 @@
                                 <form id="login">
                                     <input type="text" placeholder="User name" id="user_name">
                                     <input type="password" placeholder="Password" id="password">
-                                    <a class="btn" onclick="getInfo()">Log in</a>
+                                    <a class="btn" onclick="loginPHP()">Log in</a>
                                     <a onclick="forgotPW()" style="cursor: pointer;">Forgot password |</a>
-                                    <a onclick="close_login_reg_form2()" style="cursor: pointer;">| Cancel</a>
+                                    <a onclick="close_login_reg_form()" style="cursor: pointer;">| Cancel</a>
                                 </form>
 
                                 <form id="register">
-                                    <input type="text" placeholder="User name" id="user_name1">
-                                    <input type="email" placeholder="Email" id="email">
-                                    <input type="password" placeholder="Password" id="password1">
-                                    <input type="password" placeholder="Repeat password" id="password2">
-                                    <input type="text" placeholder="Phone number" id="phoneNumber">
-                                    <input type="text" placeholder="Address" id="address">
-                                    <a class="btn" onclick="getInfo1()">Register</a>
-                                    <a onclick="close_login_reg_form2()" style="cursor: pointer;">Cancel</a>
+                                    <input type="text" placeholder="Full name" id="user_name1" pattern="^[a-zA-ZàáãạảăắằẳẵặâấầẩẫậèéẹẻẽêềếểễệđìíĩỉịòóõọỏôốồổỗộơớờởỡợùúũụủưứừửữựỳỵỷỹýÀÁÃẠẢĂẮẰẲẴẶÂẤẦẨẪẬÈÉẸẺẼÊỀẾỂỄỆĐÌÍĨỈỊÒÓÕỌỎÔỐỒỔỖỘƠỚỜỞỠỢÙÚŨỤỦƯỨỪỬỮỰỲỴỶỸÝ ]{2,30}(?: [a-zA-ZàáãạảăắằẳẵặâấầẩẫậèéẹẻẽêềếểễệđìíĩỉịòóõọỏôốồổỗộơớờởỡợùúũụủưứừửữựỳỵỷỹýÀÁÃẠẢĂẮẰẲẴẶÂẤẦẨẪẬÈÉẸẺẼÊỀẾỂỄỆĐÌÍĨỈỊÒÓÕỌỎÔỐỒỔỖỘƠỚỜỞỠỢÙÚŨỤỦƯỨỪỬỮỰỲỴỶỸÝ ]+){1,2}$" required="required" autofocus required title="Full name only contains normal character">
+                                    <input type="email" placeholder="Email" id="email" pattern="^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$" required="required" autofocus required title="Email must have character '@', '.', normal ones">
+                                    <input type="password" placeholder="Password" id="password1" autofocus required title="Password must have lower, upper character, number, special characters, the length at least 8 chars">
+                                    <input type="text" placeholder="Phone number" id="phoneNumber" pattern="(0[1-9])+([0-9]{8})\b" required="required" autofocus required title="Phone number only contains digits">
+                                    <input type="text" placeholder="Address" id="address" pattern="^[a-zA-Z0-9/\,àáãạảăắằẳẵặâấầẩẫậèéẹẻẽêềếểễệđìíĩỉịòóõọỏôốồổỗộơớờởỡợùúũụủưứừửữựỳỵỷỹýÀÁÃẠẢĂẮẰẲẴẶÂẤẦẨẪẬÈÉẸẺẼÊỀẾỂỄỆĐÌÍĨỈỊÒÓÕỌỎÔỐỒỔỖỘƠỚỜỞỠỢÙÚŨỤỦƯỨỪỬỮỰỲỴỶỸÝ ](?: [a-zA-Z0-9/\,àáãạảăắằẳẵặâấầẩẫậèéẹẻẽêềếểễệđìíĩỉịòóõọỏôốồổỗộơớờởỡợùúũụủưứừửữựỳỵỷỹýÀÁÃẠẢĂẮẰẲẴẶÂẤẦẨẪẬÈÉẸẺẼÊỀẾỂỄỆĐÌÍĨỈỊÒÓÕỌỎÔỐỒỔỖỘƠỚỜỞỠỢÙÚŨỤỦƯỨỪỬỮỰỲỴỶỸÝ ]+){1,2}$" required="required">
+                                    <a class="btn" onclick="registerPHP()">Register</a>
+                                    <a onclick="close_login_reg_form()" style="cursor: pointer;">Cancel</a>
                                 </form>
                             </div>
                         </div>
@@ -161,32 +151,25 @@
                 </div>
             </div>
         </div>
-        <div class="container-detail-product">
+        <div class="small-container" id="bs&na" style="display: none">
+        </div>
+        <div class="small-container" id="all_products">
+        </div>
             <?php
                 if (isset($_GET['idProduct'])) {
                     $idProduct = $_GET['idProduct'];
                     require_once('../utils/connect_db.php');
                     ['findProductById' => $product] = require '../Entities/product.php';
                     $data = $product($conn,$idProduct);
-                    print_r($data);
+                    $res = '<div class="row2"><div class="col4v2" id="image" style="margin-right: -25%;"><img src="'.$data['Hinh'].'" style="width:140%"></div><div class="col4v2"><div class="info"><div id="productInfo"><h2>'.$data['Ten'].'</h2></div><p>'.number_format($data['GiaBan'], 0, '', '.').'VND</p></div><b>Description: </b><p> Unisex, comfortable for everyone in all age ranges, <br>make you warm in winter, cool in summer, one of the best sellers in our shop. </p><b>Size : </b><div><select id="size"><option>XS</option><option>S</option><option>M</option><option selected="">L</option><option>XL</option><option>XXL</option></select></div><b>Quantity: </b><div class="quantity"> <button class="quantitydown" onclick="quantitydown()">-</button> <input type="text" id="quantity" value="1"> <button class="quantityup" onclick="quantityup()">+</button></div><div id="atc" class="addToCart" style="cursor: pointer;"><a onclick="addToCart(this.id)" id="'.$data['MaSP'].'">add to cart</a></div></div></div></div>';
+                    $result = "<script>document.getElementById('all_products').innerHTML='".$res."'</script>";
+                    echo($result);
                 }
             ?>
-        </div>
-        <section id="banner2" class="banner2">
-            <div class="container2">
-                <div class="largeee-banner">
-                    <img src="..\image/banner.png">
-                </div>
-                <div class="content-banner2">
-                    <p class="dont">DON’T SWEAT GIFTING</p>
-                    <p>Order early—for peace of mind, start holiday gift shopping now to avoid shipping delays.</p>
-                    <p class="top">SHOP TOP GIFTS</p>
-                </div>
-            </div>
-        </section>
+
         <div class="website-features">
             <div class="container">
-                <div class="row" style="margin-left: 140px;">
+                <div class="row">
                     <div class="col1">
                         <img src="..\image\ft1.png">
                         <div class="feature-text">
@@ -216,10 +199,10 @@
                 </div>
             </div>
         </div>
-
         <button onclick="topFunction()" id="BtnTop" title="Go to top">Top</button>
 
-        <div class="footer">
+
+        <div class="footer" >
             <div class="row">
                 <div class="col">
                     <h1>
@@ -259,6 +242,7 @@
         </div>
     </div>
     <script src="../js/scripts.js"></script>
+    <script src="../login/login.js"></script>
 </body>
 
 </html>

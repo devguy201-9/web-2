@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 06, 2021 at 08:12 AM
+-- Generation Time: Apr 23, 2021 at 05:09 PM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 7.4.15
 
@@ -51,8 +51,7 @@ CREATE TABLE `chucvu` (
 
 INSERT INTO `chucvu` (`MaCH`, `TenCh`) VALUES
 (1, 'Manager'),
-(2, 'Seller'),
-(3, 'Warehouse staff');
+(2, 'Seller');
 
 -- --------------------------------------------------------
 
@@ -68,13 +67,6 @@ CREATE TABLE `hoadon` (
   `ThanhTien` double NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Dumping data for table `hoadon`
---
-
-INSERT INTO `hoadon` (`MaHD`, `NGAYXUAT`, `MaKH`, `TinhTrang`, `ThanhTien`) VALUES
-(1, '2021-09-03 00:00:00', 1, 0, 0);
-
 -- --------------------------------------------------------
 
 --
@@ -84,8 +76,6 @@ INSERT INTO `hoadon` (`MaHD`, `NGAYXUAT`, `MaKH`, `TinhTrang`, `ThanhTien`) VALU
 CREATE TABLE `khachhang` (
   `MaKH` int(11) NOT NULL,
   `Ten` varchar(50) NOT NULL,
-  `NgaySinh` datetime NOT NULL,
-  `GioiTinh` varchar(10) NOT NULL,
   `DiaChi` varchar(50) NOT NULL,
   `Email` varchar(50) NOT NULL,
   `SDT` varchar(50) NOT NULL,
@@ -97,8 +87,10 @@ CREATE TABLE `khachhang` (
 -- Dumping data for table `khachhang`
 --
 
-INSERT INTO `khachhang` (`MaKH`, `Ten`, `NgaySinh`, `GioiTinh`, `DiaChi`, `Email`, `SDT`, `MatKhau`, `TinhTrang`) VALUES
-(1, 'Nguyễn Lê Huy Thắng', '2001-12-12 00:00:00', 'Nam', '456/17 Tan Phú', 'nguyenlehuythang@gmail.com', '0901407894', '123456789', 1);
+INSERT INTO `khachhang` (`MaKH`, `Ten`, `DiaChi`, `Email`, `SDT`, `MatKhau`, `TinhTrang`) VALUES
+(1, 'Nguyen Le Huy Thang', '456/17 pth', 'nguyenlehuythang@gmail.com', '0901407894', '25d55ad283aa400af464c76d713c07ad', 1),
+(2, 'Nguyen Le Huy Thang', '456/17 pth', 'nguyenng@gmail.com', '0901407894', '25d55ad283aa400af464c76d713c07ad', 1),
+(4, 'Sang Vũ Trụ', 'Tân Phú', 'sang@gmail.com', '0901407894', '99f7dce285bb3f9b3c4517afc3038cc5', 1);
 
 -- --------------------------------------------------------
 
@@ -116,8 +108,8 @@ CREATE TABLE `loai` (
 --
 
 INSERT INTO `loai` (`MaLo`, `TenLoai`) VALUES
-(1, 'Áo'),
-(2, 'Quần');
+(1, 'T-Shirt'),
+(2, 'Pant');
 
 -- --------------------------------------------------------
 
@@ -128,11 +120,8 @@ INSERT INTO `loai` (`MaLo`, `TenLoai`) VALUES
 CREATE TABLE `nhanvien` (
   `MaNV` int(11) NOT NULL,
   `Ten` varchar(50) NOT NULL,
-  `NgaySinh` datetime NOT NULL,
-  `GioiTinh` varchar(10) NOT NULL,
   `MaCh` int(11) NOT NULL,
-  `DiaChiTT` varchar(50) NOT NULL,
-  `DiaChiTaT` varchar(50) NOT NULL,
+  `DiaChi` varchar(50) NOT NULL,
   `Password` text NOT NULL,
   `TinhTrang` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -263,14 +252,14 @@ ALTER TABLE `chucvu`
 --
 ALTER TABLE `hoadon`
   ADD PRIMARY KEY (`MaHD`),
-  ADD KEY `MaKH` (`MaKH`);
+  ADD UNIQUE KEY `MaKH` (`MaKH`);
 
 --
 -- Indexes for table `khachhang`
 --
 ALTER TABLE `khachhang`
   ADD PRIMARY KEY (`MaKH`),
-  ADD UNIQUE KEY `Email` (`Email`,`SDT`);
+  ADD UNIQUE KEY `Email` (`Email`);
 
 --
 -- Indexes for table `loai`
@@ -290,7 +279,6 @@ ALTER TABLE `nhanvien`
 --
 ALTER TABLE `sanpham`
   ADD PRIMARY KEY (`MaSP`),
-  ADD UNIQUE KEY `Hinh` (`Hinh`) USING HASH,
   ADD KEY `MaLoai` (`MaLoai`);
 
 --
@@ -301,19 +289,19 @@ ALTER TABLE `sanpham`
 -- AUTO_INCREMENT for table `chucvu`
 --
 ALTER TABLE `chucvu`
-  MODIFY `MaCH` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `MaCH` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `hoadon`
 --
 ALTER TABLE `hoadon`
-  MODIFY `MaHD` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `MaHD` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `khachhang`
 --
 ALTER TABLE `khachhang`
-  MODIFY `MaKH` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `MaKH` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `loai`
@@ -354,7 +342,7 @@ ALTER TABLE `hoadon`
 -- Constraints for table `nhanvien`
 --
 ALTER TABLE `nhanvien`
-  ADD CONSTRAINT `nhanvien_ibfk_1` FOREIGN KEY (`MaCh`) REFERENCES `chucvu` (`MaCH`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `nhanvien_ibfk_1` FOREIGN KEY (`MaCh`) REFERENCES `chucvu` (`MaCH`);
 
 --
 -- Constraints for table `sanpham`

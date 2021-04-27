@@ -286,6 +286,7 @@ input[type=checkbox]:checked ~ .sidebarIconToggle > .diagonal.part-2
 {
     background: black;
     color: #FF8C00;
+    text-decoration: none;
 }
 
 .closeDetail2
@@ -340,17 +341,18 @@ input[type=checkbox]:checked ~ .sidebarIconToggle > .diagonal.part-2
 {
     content: '';
     background: #FF8C00;
-    width: 150px;
+    width: 30%;
     height: 5px;
     border-radius: 5px;
     position: absolute;
     bottom: 0px;
     left: 50%;
+    top: 60px;
     transform: translateX(-50%);
 }
 
 
-.small-container
+.small_container
 {
     max-width: 100%;
 }
@@ -421,7 +423,7 @@ input[type=checkbox]:checked ~ .sidebarIconToggle > .diagonal.part-2
 .form-container
 {
     background: white;
-    width: 300px;
+    width: 360px;
     height: 435px;
     border: 5px solid orange;
     border-radius: 20px;
@@ -451,7 +453,7 @@ h2
     border: 3px solid orange;
 }
 
-.btn 
+.btn3
 {
     width: 100%;
     border: none;
@@ -467,7 +469,7 @@ h2
     margin-bottom: 2px;
 }
 
-.btn:hover
+.btn3:hover
 {
     color: #ff8c00;
     background: black;
@@ -515,7 +517,7 @@ h2
     padding-left: 10px;
     border-radius: 7px;
     font-size: 25px;
-    height: 35px;
+    height: 45px;
     border: 3px solid #FF8C00;
 }
 
@@ -533,6 +535,11 @@ h2
     font-size: 60px;
 }
 
+.closebtn{
+    top: 62px !important;
+    right: 24px !important;
+}
+
 #kind
 {
     width: 95px;
@@ -548,7 +555,7 @@ select:focus
     outline: none;
 }
 
-.btn:focus
+.btn3:focus
 {
     outline: none;
 }
@@ -587,6 +594,11 @@ input:focus
 button:focus
 {
     outline: none;
+}
+
+a:hover{
+    color: #FF8C00;
+    text-decoration: none;
 }
 
 .btn2:hover
@@ -687,3 +699,58 @@ canvas
     }
 }
 /*end responsive for all*/
+.fixed_header {
+    width: 900px;
+    table-layout: fixed;
+    border-collapse: collapse;
+}
+
+.fixed_header tbody {
+    display: block;
+    width: 100%;
+    overflow: auto;
+    height: 500px;
+}
+
+.fixed_header thead tr {
+    display: block;
+}
+
+.fixed_header thead {
+    background: orange;
+    color: #fff;
+}
+
+.fixed_header th,
+.fixed_header td {
+    padding: 12px;
+    text-align: left;
+    border: 1px solid orange;
+    width: 200px;
+    box-sizing: border-box;
+}
+
+.fixed_header th {
+    text-align: center;
+}
+
+.fixed_header tr {
+    transition: 0.1s;
+}
+
+.fixed_header tr:hover {
+    background-color: rgb(255, 167, 2);
+    color: white;
+}
+
+.fixed_header tr:hover td {
+    border: 1px solid white;
+}
+
+.chart {
+    text-align: center;
+    margin: auto;
+}
+.row-chart {
+    margin-bottom: 150px;
+}
