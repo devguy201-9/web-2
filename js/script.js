@@ -195,17 +195,12 @@ function statisticBestProdByType(){
 
 function deleteProduct(id)
 {
-	if (confirm("Confirm to remove this product from store."))
-	{
-		console.log("doooooooooooo");
-		var product_info = JSON.parse(localStorage.getItem('product_info'));
-		for (var i = 0; i < product_info.length; i++)
-			if (product_info[i].id == id)
-			{
-				product_info.splice(i, 1);
-				break;
-			}
-		localStorage.setItem('product_info', JSON.stringify(product_info));
+	document.getElementById('message-confirm').innerHTML="Are you sure you want to delete ?";
+	document.getElementById('btnpopupConfirm').click();
+	document.getElementById('btnConfirm').onclick = function() {
+		document.getElementById('idProd').value=id;
+		document.getElementById('typeActionProd').value="delete";
+		document.getElementById('btnActionProd').click();
 	}
 }
 
@@ -259,10 +254,15 @@ function AddProduct()
 
 function openForm()
 {
-	document.getElementById('addProductForm').style.top = "15%";
-	document.getElementById('addProductForm').style.height = "393px";
-	document.getElementById('addProductForm').innerHTML = '<a class="closeDetail2" onclick="closeDetail()" style="cursor: pointer;">×</a><form><h2>ADD PRODUCT</h2><input type="text" placeholder="Product name" id="product_name"><input type="text" placeholder="ID" id="id"><input type="text" placeholder="Price" id="price"><input type="text" placeholder="Product type" id="type"><p style="margin-top: -4px; margin-bottom: -4px">Product image:</p><input type="file" placeholder="Image" id="image"><a class="btn" onclick = "AddProduct()" style="width: 64%">ADD</a></form>'
-	closeSideBar();
+	document.getElementById('typeActionProd').value="create";
+	document.getElementById('btnActionProd').click();
+}
+
+function openFormEdit(id)
+{
+	document.getElementById('idProd').value=id;
+	document.getElementById('typeActionProd').value="findProd";
+	document.getElementById('btnActionProd').click();
 }
 
 function saleAccordingToMonth()
@@ -493,8 +493,11 @@ function openManageAccForm()
 function closeDelForm()
 {
 	document.getElementById('deleteProForm').style.width = "0%";
-	document.getElementById('manageAccount').style.width = "0%";
+	document.getElementById('manageAccount').style.width = "0%"; 
 	closeDetail();
+	document.getElementById('kind').value='idProduct';
+	document.getElementById('inputSearch').value='';
+	document.getElementById('search_result').innerHTML='';
 	closeAddForm();
 }
 
@@ -571,25 +574,18 @@ function searchByName()
 	}
 }
 
-function changeSearchType()
-{
-	var sel1 = document.getElementById("kind");
-	var text1 = sel1.options[sel1.selectedIndex].text;
-	if (text1 == 'ID')
-	{
-		document.getElementById("input").placeholder = "Search by product ID";
-		searchById();
-	}
-	else
-	{
-		document.getElementById("input").placeholder = "Search by product name";
-		searchByName();
-	}
+function searchProduct() {
+	document.getElementById("submitSearchProd").click();
 }
-
-function search()
-{
-	changeSearchType();
+function changeSearchProduct(){
+	document.getElementById('inputSearch').value='';
+	let kind = document.getElementById('kind').value;
+	if(kind =="idProduct"){
+		document.getElementById("inputSearch").placeholder = "Search by product ID";
+	} else {
+		document.getElementById("inputSearch").placeholder = "Search by product name";
+	}
+	searchProduct();
 }
 
 function getType(id)
@@ -858,6 +854,7 @@ function getInfo2()
 
 function loadPage()
 {
+	document.getElementById('addProductForm').style.top = "-300%";
 	showBill();
 	var admin = localStorage.getItem('current_admin');
 	document.getElementById("admin").innerHTML = admin + "<span>Co-founder and owner</span>"

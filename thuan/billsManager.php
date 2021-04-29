@@ -24,12 +24,12 @@
         if(!$flag) {
             $res = $res."<script>document.getElementById('btnConfirm').style=\"display: none\";
             document.getElementById('message-confirm').style=\"color: red\";
-            document.getElementById('message-confirm').innerHTML=\"Delete failed !\";
+            document.getElementById('message-confirm').innerHTML=\"Delete bill failed !\";
             document.getElementById('btnConfirmNo').innerHTML=\"Close\";</script>";
         } else {
             $res = $res."<script>document.getElementById('btnConfirm').style=\"display: none\";
-            document.getElementById('message-confirm').style=\"color: red\";
-            document.getElementById('message-confirm').innerHTML=\"Delete success !\";
+            document.getElementById('message-confirm').style=\"color: green\";
+            document.getElementById('message-confirm').innerHTML=\"Delete bill success !\";
             document.getElementById('btnConfirmNo').innerHTML=\"Close\";</script>";
         }       
     } else {

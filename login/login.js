@@ -37,25 +37,112 @@ function close_login_reg_form()
     }
 }
 
-// function renderData(){
-//     if(response['sp']){
-//         let sp="";
-//         for(let i=0;i<response['sp'].length;i++){
-//             sp+=`<div class="sp"><img src="./${response['sp'][i]['hinh']}" alt="" class="hinh"><div class="ten">${response['sp'][i]['ten']}</div></div>`
-//         }
-//         document.querySelector('.data').innerHTML=sp;
-//     }
-// }
+function showCartInfo(spArray)
+{
+    console.log("show" + spArray);
+    var thead = "<thead><tr><th scope='col'>#</th><th scope='col'>Name</th><th scope='col'>Size</th><th scope='col'>Quantity</th><th scope='col'>Unit price</th><th scope='col'>Delete</th></tr></thead>";
+    var total = 0;
+    if (spArray !== undefined)
+    {
+        var info = "<tbody>";
+        for (var i = 0; i < spArray.length; i++)
+        {
+            info += "<tr id='" + spArray[i]["masp"] + "r'><th scope='row'>" + (parseInt(i) + 1) + "</th>" + "<td>" + spArray[i]["ten"] + "</td>" + "<td id='" + spArray[i]["masp"] + "s'>" + spArray[i]["size"] + "</td>" + "<td id ='" + spArray[i]["masp"] + "q'>" + spArray[i]["soluong"] + "</td>" + "<td>" + spArray[i]["giaban"] + "</td>" + "<td>" + '<a id="' + spArray[i]["masp"] + '" onclick="deletePHP(this.id)" class="btn" style="cursor: pointer;margin: 0%;">Delete</a>' + "</td>" + "</tr>";
+            total = parseInt(total) + parseInt(spArray[i]["soluong"])*parseInt(spArray[i]["giaban"]);
+        }
+        thead = thead + info + "</tbody>";
+    }
+    // console.log(thead);
+    var orderBTN = "Total: " + parseInt(total).toLocaleString('it-IT', {style : 'currency', currency : 'VND'}) + '<a class="btn" style="cursor: pointer;margin-left: 20px" onclick="orderPHP()" price="' + total + '" id="orderBill">Order</a>';
+    document.getElementById("MyCart").innerHTML = thead;
+    document.getElementById("btr").innerHTML = orderBTN;
+    // console.log(document.getElementById("MyCart"));
+}
+
+function getStatus(str)
+{
+    if (str == '1')
+        return 'Processing';
+    if (str == '2')
+        return 'Delivering';
+    if (str == '3')
+        return 'Delivered';
+}
+
+function showOrderInfo(spArray)
+{
+    console.log("show" + spArray);
+    var inSide = '<a class="closeCart" onclick="closeOrder()" style="cursor: pointer;margin-top: -20px; color: black">×</a><h2 style="margin-left: 0%;color: #ff8c00;margin-top: 0%;font-size: 35px;">Your order <i class="fas fa-clipboard-list"></i></h2>';
+    var infoHD = "<div style='font-size: 23px;'>";
+    var thead = '<table class="table table-success table-striped">' + "<thead><tr><th scope='col'>#</th><th scope='col'>Name</th><th scope='col'>Size</th><th scope='col'>Quantity</th><th scope='col'>Unit price</th></thead>";
+    var total = 0;
+    if (spArray !== undefined)
+    {
+        infoHD += 'Bill ID: ' + spArray[0]["mahd"];
+        var currentId = spArray[0]["mahd"];
+        var info = "<tbody>";
+        for (var i = 0; i < spArray.length; i++)
+        {
+            if (currentId.localeCompare(spArray[i]["mahd"]) == 0)
+            {
+                info += "<tr id='" + spArray[i]["masp"] + "r'><th scope='row'>" + (parseInt(i) + 1) + "</th>" + "<td style='width: 400px;'>" + spArray[i]["ten"] + "</td>" + "<td id='" + spArray[i]["masp"] + "s'>" + spArray[i]["size"] + "</td>" + "<td id ='" + spArray[i]["masp"] + "q'>" + spArray[i]["soluong"] + "</td>" + "<td>" + spArray[i]["giaban"] + "</td>" + "</tr>";
+                total = parseInt(total) + parseInt(spArray[i]["soluong"])*parseInt(spArray[i]["giaban"]);
+            }
+            else if (currentId.localeCompare(spArray[i]["mahd"]) != 0)
+            {
+                thead = thead + info + "</tbody></table>";
+                console.log("thread");
+                inSide += infoHD + "<br>Total: " + parseInt(total).toLocaleString('it-IT', {style : 'currency', currency : 'VND'}) + "<br>Status: " + getStatus(spArray[0]['tinhtrang']) + '</div>'+ thead + "<br>";
+                infoHD = "<div style='font-size: 23px;'>" + 'Bill ID: ' + spArray[i]["mahd"];
+                thead = '<table class="table table-success table-striped">' + "<thead><tr><th scope='col'>#</th><th scope='col'>Name</th><th scope='col'>Size</th><th scope='col'>Quantity</th><th scope='col'>Unit price</th></thead>";
+                total = 0;
+                currentId = spArray[i]["mahd"];
+                info = "<tbody>";
+                info += "<tr id='" + spArray[i]["masp"] + "r'><th scope='row'>" + (parseInt(i) + 1) + "</th>" + "<td style='width: 400px;'>" + spArray[i]["ten"] + "</td>" + "<td id='" + spArray[i]["masp"] + "s'>" + spArray[i]["size"] + "</td>" + "<td id ='" + spArray[i]["masp"] + "q'>" + spArray[i]["soluong"] + "</td>" + "<td>" + spArray[i]["giaban"] + "</td>" + "</tr>";
+                total = parseInt(total) + parseInt(spArray[i]["soluong"])*parseInt(spArray[i]["giaban"]);
+            }
+            else if (i == spArray.length - 1)
+            {
+                console.log("thread");
+                thead = thead + info + "</tbody></table>";
+                inSide += infoHD + "<br>Total: " + parseInt(total).toLocaleString('it-IT', {style : 'currency', currency : 'VND'}) + "<br>Status: " + getStatus(spArray[0]['tinhtrang']) + '</div>'+ thead;
+            }
+        }
+    }
+    document.getElementById("order").innerHTML = inSide;
+}
+
+function openCart()
+{
+    if (!((document.getElementById("MenuItems").style.maxHeight).localeCompare("0px") == 0))
+        menutoggle();
+    document.getElementById('cart').style.top = "0%";
+    checkCookie();
+}
+
+function yourOrder()
+{
+    console.log(document.getElementById("MenuItems").style.maxHeight);
+   if (!((document.getElementById("MenuItems").style.maxHeight).localeCompare("0px") == 0))
+        menutoggle();
+    document.getElementById('order').style.top = "0%";
+    checkCookie();
+}
 
 function checkCookie(){
     var xml=new XMLHttpRequest();
     xml.onreadystatechange=function(){
         if(xml.readyState==4 && xml.status==200){
+            // console.log(xml.responseText);
             response=JSON.parse(xml.responseText);
-            console.log(response);
-            console.log(xml.responseText);
+            // console.log(response);
             if(response['status']==1){
-                document.getElementById("acc").innerHTML = '<a id="userName">' + response['thongtin']['name'].split(" ").splice(-1) + '</a>';
+                console.log("not run");
+                
+                showCartInfo(response['sp']);
+                showOrderInfo(response['hd']);
+                
+                document.getElementById("acc").innerHTML = '<a id="userName" thongtin="'+ response['thongtin']['email'] + '">' + response['thongtin']['name'].split(" ").splice(-1) + '</a>';
                 document.getElementById("logOut").style.display = "inline-block";
                 document.getElementById("log_out").innerHTML = '<i class="fas fa-sign-out-alt"></i>'; 
             }
@@ -76,10 +163,10 @@ function loginPHP(){
     let email=document.querySelector('#user_name'),password=document.querySelector('#password');
     xml.onreadystatechange=function(){
         if(xml.readyState==4 && xml.status==200){
-            console.log(xml.responseText);
+            // console.log(xml.responseText);
             response=JSON.parse(xml.responseText);
-            console.log(response);
-            console.log(xml.responseText);
+            // console.log(response);
+            // console.log(xml.responseText);
             if(response['status']==1){
                 document.getElementById("acc").innerHTML = '<a id="userName">' + response['thongtin']['name'].split(" ").splice(-1) + '</a>';
                 document.getElementById("logOut").style.display = "inline-block";
@@ -91,27 +178,18 @@ function loginPHP(){
             }
         }
     }
-    console.log("truoc: "+email+" "+password);
+    // console.log("truoc: "+email+" "+password);
     xml.open('post','../login/login.php');
     xml.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xml.send(`requestType=2&email=${email.value}&pass=${password.value}`);
-    // xml.send();
 }
-
-// function clear(){
-//     document.querySelector('.info .hinh').src="";
-//     document.querySelector('.info .ten').innerHTML="";
-//     document.querySelector('.info .email').innerHTML="";
-//     document.querySelector('.data').innerHTML="";
-
-// }
 
 function log(){
     var xml=new XMLHttpRequest();
     xml.onreadystatechange=function(){
         if(xml.readyState==4 && xml.status==200){
             response=JSON.parse(xml.responseText);
-            console.log(xml.responseText);
+            // console.log(xml.responseText);
 
             if(response['status']==1)
             {
@@ -179,8 +257,8 @@ function registerPHP(){
     xml.onreadystatechange=function(){
         if(xml.readyState==4 && xml.status==200){
             response=JSON.parse(xml.responseText);
-            console.log(response);
-            console.log(xml.responseText);
+            // console.log(response);
+            // console.log(xml.responseText);
             if (response["status"] == 1)
             {
                 name=document.querySelector('#user_name1').value;

@@ -74,10 +74,33 @@
             }
             return $data;
         },
-        'updateProduct' => function($conn,$products) {
-            $query ="UPDATE sanpham SET Ten = '".$products['Ten']."',Hinh = '".$products['Hinh']."',GiaBan = "
-            .$products['GiaBan'].",MaLoai = ".$products['MaLoai'].",SoLuongTon = ".$products['SoLuongTon']
-            ." WHERE MaSP = ".$products['MaSP'];
+        'SearchProductsAdmin' => function($conn,$input,$kind) {
+            $condition = " = ";
+            $query = "SELECT * FROM sanpham AS sp INNER JOIN loai AS l ON sp.MaLoai = l.MaLo ";
+            if(strcmp($kind,"idProduct") == 0) {
+                if(empty($input)){
+                    $condition = " <> ";
+                    $input = 0;
+                }
+                $query = $query."WHERE MaSP".$condition.$input;
+            } else {
+                if(!empty($input)) {
+                    $query = $query."WHERE Ten LIKE '%".$input."%'";
+                }
+            }
+            $result = mysqli_query($conn,$query);
+            $data = array();
+            if($result){
+                while($row = mysqli_fetch_array($result)){
+                    $data[] = $row;
+                }
+            }
+            return $data;
+        },
+        'updateProduct' => function($conn,$products,$id) {
+            $query ="UPDATE sanpham SET Ten = '".$products[0]."',Hinh = '".$products[4]."',GiaBan = "
+            .$products[1].",MaLoai = ".$products[2].",SoLuongTon = ".$products[3]
+            ." WHERE MaSP = ".$id;
             $result = mysqli_query($conn,$query);
             if(!$result) {
                 return false;
@@ -85,8 +108,8 @@
             return true;
         },
         'insertProduct' => function($conn,$products) {
-            $query ="INSERT INTO sanpham (Ten,Hinh,GiaBan,MaLoai,SoLuongTon) VALUES ('".$products['Ten']."','".$products['Hinh']."',"
-            .$products['GiaBan'].",".$products['MaLoai'].",".$products['SoLuongTon'].")";
+            $query ="INSERT INTO sanpham (Ten,Hinh,GiaBan,MaLoai,SoLuongTon) VALUES ('".$products[0]."','".$products[4]."',"
+            .$products[1].",".$products[2].",".$products[3].")";
             $result = mysqli_query($conn,$query);
             if(!$result) {
                 return false;

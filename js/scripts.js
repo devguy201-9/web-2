@@ -644,11 +644,11 @@ function closeDetail()
 	document.getElementById('product_detail').style.top = "-300%";
 }
 
-var cart = [];
-if (localStorage['cartCount'] == null)
-{
-	localStorage.setItem('cartCount', -1);
-}
+// var cart = [];
+// if (localStorage['cartCount'] == null)
+// {
+// 	localStorage.setItem('cartCount', -1);
+// }
 
 function isBlocked(name)
 {
@@ -741,12 +741,7 @@ function showCart()
 	}
 }
 
-function openCart()
-{
-	menutoggle();
-	document.getElementById('cart').style.top = "0%";
-	showCart();
-}
+
 
 function quantitydown2(id)
 {
@@ -944,35 +939,35 @@ function getState(state)
 	return "Your order is being delivered.";
 }
 
-function yourOrder()
-{
-	menutoggle()
-	document.getElementById('order').style.top = "0%";
-	var save_order = JSON.parse(localStorage.getItem('save_order'));
-	var temp = "";
-	if (document.getElementById('userName') == null)
-		document.getElementById("MyOrder").innerHTML = "You have not ordered anything, yet.";
-	else
-	{
-		var userName = document.getElementById('userName').text;
-		var flag = false;
-		for (var i = 0; i < save_order.length; i++)
-		{
-			if (userName == save_order[i].name)
-			{
-				temp += '<li style="margin-bottom: 1.5%;"><p>Order ID: ' + save_order[i].id + '</p>' + '<p>Date: ' + save_order[i].date + '</p><p> State: ' + getState(save_order[i].state) + '</p> <ul>';
-				for (var j = 0; j < save_order[i].order.length; j++)
-				{
-					temp += '<li style="display: inline-block; margin-right: 5%;border-radius: 10px;border: 2px solid black; padding: 5px; margin-bottom: 5px"> <p style="font-size: 28px;">' + getProductName(save_order[i].order[j][0]) + "</p>" + "<p> Size: " + save_order[i].order[j][1] + '</p> <p> Quantity: ' + save_order[i].order[j][2] + '</p></li>';
-				}
-				temp += '</ul></li>';
-				flag = true;
-			}
-		}
-		// console.log('sort_client_order', save_order);
-		document.getElementById("MyOrder").innerHTML = temp;
-	}
-}
+// function yourOrder()
+// {
+// 	menutoggle()
+// 	document.getElementById('order').style.top = "0%";
+	// var save_order = JSON.parse(localStorage.getItem('save_order'));
+	// var temp = "";
+	// if (document.getElementById('userName') == null)
+	// 	document.getElementById("MyOrder").innerHTML = "You have not ordered anything, yet.";
+	// else
+	// {
+	// 	var userName = document.getElementById('userName').text;
+	// 	var flag = false;
+	// 	for (var i = 0; i < save_order.length; i++)
+	// 	{
+	// 		if (userName == save_order[i].name)
+	// 		{
+	// 			temp += '<li style="margin-bottom: 1.5%;"><p>Order ID: ' + save_order[i].id + '</p>' + '<p>Date: ' + save_order[i].date + '</p><p> State: ' + getState(save_order[i].state) + '</p> <ul>';
+	// 			for (var j = 0; j < save_order[i].order.length; j++)
+	// 			{
+	// 				temp += '<li style="display: inline-block; margin-right: 5%;border-radius: 10px;border: 2px solid black; padding: 5px; margin-bottom: 5px"> <p style="font-size: 28px;">' + getProductName(save_order[i].order[j][0]) + "</p>" + "<p> Size: " + save_order[i].order[j][1] + '</p> <p> Quantity: ' + save_order[i].order[j][2] + '</p></li>';
+	// 			}
+	// 			temp += '</ul></li>';
+	// 			flag = true;
+	// 		}
+	// 	}
+	// 	// console.log('sort_client_order', save_order);
+	// 	document.getElementById("MyOrder").innerHTML = temp;
+	// }
+// }
 
 function closeOrder()
 {

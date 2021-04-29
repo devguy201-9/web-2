@@ -18,13 +18,16 @@
     <div class="container_all" style="width: 100%; position: absolute;">
         <div class="cart" style="width: 100%; height: 100%;" id="cart">
             <a class="closeCart" onclick="closeCart()" style="cursor: pointer;">×</a>
-            <h2>Your cart <i class="fas fa-shopping-cart"></i></h2>
-            <ul id="MyCart"></ul>
+            <h2 style="margin-left:0; font-size: 35px">Your cart <i class="fas fa-shopping-cart"></i></h2>
+            <table id="MyCart" class="table table-success table-striped"></table>
+            <div class="bottom_right" id="btr"></div>
         </div>
-        <div class="order" style="width: 100%; height: 100%;" id="order">
+        <div class="order" style="width: 100%; height: 100%; top: -600%;" id="order">
+            
             <a class="closeCart" onclick="closeOrder()" style="cursor: pointer;margin-top: -20px; color: black">×</a>
-            <h2 style="margin-top: 0%; color: black">Your order <i class="fas fa-clipboard-list"></i></h2>
-            <ul id="MyOrder" style="margin-left: 2%; margin-top: 1%; list-style-type: none;"></ul>
+            <h2 style="margin-left: 0%;color: #ff8c00;margin-top: 0%;font-size: 35px;">Your order <i class="fas fa-clipboard-list"></i></h2>
+            <!-- <ul id="MyOrder" style="margin-left: 2%; margin-top: 1%; list-style-type: none;"></ul> -->
+            <table id="MyOrder" class="table table-success table-striped"></table>
         </div>
         
         <div class="header" id="home">
@@ -333,6 +336,7 @@
     </div>
     <script src="../js/scripts.js"></script>
     <script src="../login/login.js"></script>
+    <script src="../shopping/index.js"></script>
 </body>
 
 </html>

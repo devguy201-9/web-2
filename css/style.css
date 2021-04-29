@@ -1046,6 +1046,7 @@ button:focus
     transition: 1.1s;
     border-radius: 5px;
     border: 5px solid #FF8C00;
+    overflow: auto;
 }
 
 .closeCart
@@ -1168,4 +1169,18 @@ p.top
     color: #FF8C00;
     background-color: #fff;
     border: 1px solid #dee2e6;
+}
+
+.table thead th 
+{
+	font-size: 25px !important;
+    background: #FFA500 !important;
+}
+
+tr
+{
+	font-size: 22px;
+    background: #DCDCDC !important;
+    text-align: center !important;
+    line-height: 40px;
 }

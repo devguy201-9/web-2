@@ -30,7 +30,7 @@
             while($row = mysqli_fetch_array($result)){
                 $data[] = $row;
             }
-            if ($status < 0) {
+            if ($status > 1) {
                 usort($data, function ($a, $b) {
                     return -strtotime($a['NGAYXUAT']) + strtotime($b['NGAYXUAT']);
                 });

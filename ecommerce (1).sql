@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 23, 2021 at 05:09 PM
+-- Generation Time: Apr 29, 2021 at 04:17 AM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 7.4.15
 
@@ -30,9 +30,22 @@ SET time_zone = "+00:00";
 CREATE TABLE `chitiethd` (
   `MaHD` int(11) NOT NULL,
   `MaSP` int(11) NOT NULL,
+  `Size` varchar(10) NOT NULL,
   `SoLuong` int(10) NOT NULL,
   `GiaBan` double NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `chitiethd`
+--
+
+INSERT INTO `chitiethd` (`MaHD`, `MaSP`, `Size`, `SoLuong`, `GiaBan`) VALUES
+(1, 15, 'L', 3, 1800000),
+(3, 29, 'L', 8, 1120000),
+(3, 37, 'L', 1, 1000000),
+(3, 43, 'L', 1, 1300000),
+(4, 80, 'L', 4, 600000),
+(8, 80, 'L', 1, 600000);
 
 -- --------------------------------------------------------
 
@@ -61,11 +74,22 @@ INSERT INTO `chucvu` (`MaCH`, `TenCh`) VALUES
 
 CREATE TABLE `hoadon` (
   `MaHD` int(11) NOT NULL,
-  `NGAYXUAT` datetime NOT NULL,
+  `NGAYXUAT` datetime DEFAULT NULL,
   `MaKH` int(11) NOT NULL,
   `TinhTrang` tinyint(1) NOT NULL,
-  `ThanhTien` double NOT NULL
+  `ThanhTien` double DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `hoadon`
+--
+
+INSERT INTO `hoadon` (`MaHD`, `NGAYXUAT`, `MaKH`, `TinhTrang`, `ThanhTien`) VALUES
+(1, '2021-04-29 00:00:00', 1, 1, 0),
+(3, NULL, 6, 0, NULL),
+(4, NULL, 7, 0, NULL),
+(8, NULL, 5, 0, NULL),
+(10, NULL, 9, 0, NULL);
 
 -- --------------------------------------------------------
 
@@ -89,8 +113,12 @@ CREATE TABLE `khachhang` (
 
 INSERT INTO `khachhang` (`MaKH`, `Ten`, `DiaChi`, `Email`, `SDT`, `MatKhau`, `TinhTrang`) VALUES
 (1, 'Nguyen Le Huy Thang', '456/17 pth', 'nguyenlehuythang@gmail.com', '0901407894', '25d55ad283aa400af464c76d713c07ad', 1),
-(2, 'Nguyen Le Huy Thang', '456/17 pth', 'nguyenng@gmail.com', '0901407894', '25d55ad283aa400af464c76d713c07ad', 1),
-(4, 'Sang Vũ Trụ', 'Tân Phú', 'sang@gmail.com', '0901407894', '99f7dce285bb3f9b3c4517afc3038cc5', 1);
+(4, 'Sang Vũ Trụ', 'Tân Phú', 'sang@gmail.com', '0901407894', '99f7dce285bb3f9b3c4517afc3038cc5', 1),
+(5, 'Chôm Chỉa', 'Tân Phú', 'chom@gmail.com', '0901407894', '441402dd8cf8d006df5e7cce84c19ec6', 1),
+(6, 'Chôm Chỉa', 'Tân Phú', 'choch@gmail.com', '0901407894', '441402dd8cf8d006df5e7cce84c19ec6', 1),
+(7, 'Sang Vũ Trụ', 'Tân Phú', 'vubu@gmail.com', '0901407894', '441402dd8cf8d006df5e7cce84c19ec6', 1),
+(8, 'Sang Vũ Trụ', 'Tân Phú', 'vutru@gmail.com', '0901407894', 'd458278448fec8ed1cf23283543ab354', 1),
+(9, 'Ka ka Ka', '456/17 Tan Phú', 'ka@gmail.com', '0123456789', '25d55ad283aa400af464c76d713c07ad', 1);
 
 -- --------------------------------------------------------
 
@@ -146,16 +174,16 @@ CREATE TABLE `sanpham` (
 --
 
 INSERT INTO `sanpham` (`MaSP`, `Ten`, `Hinh`, `GiaBan`, `MaLoai`, `SoLuongTon`) VALUES
-(6, '3-Stripes Pants', '../image/product_46.jpg', 900000, 2, 1000),
+(6, '3-Stripes Pants', '../image/product_46.jpg', 900000, 2, 994),
 (7, 'Arsenal Third Jersey', '../image/product_14.jpg', 1800000, 1, 1000),
 (8, 'Chile 20 Tee', '../image/product_15.jpg', 900000, 1, 1000),
 (9, '3D Trefoil Graphic Tee', '../image/product_16.jpg', 600000, 1, 10000),
 (10, 'Trefoil Tee', '../image/product_17.jpg', 600000, 1, 1000),
 (11, 'Pride Trefoil Flag Fill Tee', '../image/product_32.jpg', 600000, 1, 1000),
 (12, 'Big Badge of Sport Boxy Tee', '../image/product_33.jpg', 600000, 1, 1000),
-(13, 'Lil Stripe Splash Tee', '../image/product_34.jpg', 500000, 1, 1000),
+(13, 'Lil Stripe Splash Tee', '../image/product_34.jpg', 500000, 1, 1004),
 (14, 'Adiprene Tee', '../image/product_35.jpg', 700000, 1, 1000),
-(15, 'Juventus 20/21 Third Jersey', '../image/product_36.jpg', 1800000, 1, 1000),
+(15, 'Juventus 20/21 Third Jersey', '../image/product_36.jpg', 1800000, 1, 1027),
 (16, 'adidas Z.N.E. Pants', '../image/product_47.jpg', 640000, 2, 1000),
 (17, 'Tiro 19 Training Pants', '../image/product_48.jpg', 800000, 2, 1000),
 (18, 'Aeroready Knit Pants', '../image/product_55.jpg', 860000, 2, 1000),
@@ -222,7 +250,7 @@ INSERT INTO `sanpham` (`MaSP`, `Ten`, `Hinh`, `GiaBan`, `MaLoai`, `SoLuongTon`) 
 (79, 'R.Y.V. Tee', '../image/product_41.jpg', 600000, 1, 1000),
 (80, 'Badge of Sport Tee', '../image/product_42.jpg', 600000, 1, 1000),
 (81, 'New Stacked Trefoil Tee', '../image/product_43.jpg', 600000, 1, 1000),
-(82, 'Essentials 3-Stripes Wind Pants', '../image/product_49.jpg', 1200000, 1, 1000),
+(82, 'Essentials 3-Stripes Wind Pants', '../image/product_49.jpg', 1200000, 1, 1004),
 (83, 'Sport French Terry Pants', '../image/product_50.jpg', 1700000, 2, 1000),
 (84, 'Woven Tape Pants', '../image/product_51.jpg', 900000, 2, 1000),
 (85, 'Trefoil Essentials Pants', '../image/product_52.jpg', 640000, 2, 1000),
@@ -237,9 +265,10 @@ INSERT INTO `sanpham` (`MaSP`, `Ten`, `Hinh`, `GiaBan`, `MaLoai`, `SoLuongTon`) 
 -- Indexes for table `chitiethd`
 --
 ALTER TABLE `chitiethd`
-  ADD PRIMARY KEY (`MaHD`,`MaSP`),
+  ADD PRIMARY KEY (`MaHD`,`MaSP`,`Size`),
   ADD KEY `MaHD` (`MaHD`,`MaSP`),
-  ADD KEY `MaSP` (`MaSP`);
+  ADD KEY `MaSP` (`MaSP`),
+  ADD KEY `MaHD_2` (`MaHD`,`MaSP`,`Size`);
 
 --
 -- Indexes for table `chucvu`
@@ -252,7 +281,7 @@ ALTER TABLE `chucvu`
 --
 ALTER TABLE `hoadon`
   ADD PRIMARY KEY (`MaHD`),
-  ADD UNIQUE KEY `MaKH` (`MaKH`);
+  ADD KEY `MaKH_2` (`MaKH`);
 
 --
 -- Indexes for table `khachhang`
@@ -295,13 +324,13 @@ ALTER TABLE `chucvu`
 -- AUTO_INCREMENT for table `hoadon`
 --
 ALTER TABLE `hoadon`
-  MODIFY `MaHD` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `MaHD` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `khachhang`
 --
 ALTER TABLE `khachhang`
-  MODIFY `MaKH` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `MaKH` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `loai`

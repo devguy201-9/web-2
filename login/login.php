@@ -26,14 +26,12 @@ class login
     }
 
     function excuteQuery($i = 0)
-    { //query
+    {
         if ($i == 0)
         {
-            // echo $this->query;
             $this->result = $this
                 ->conn
                 ->query($this->query);
-            // echo "num_row: ".$this->result->num_rows;
             if ($this->result->num_rows <1)
             {
                 $this->result = null;
@@ -41,11 +39,9 @@ class login
         }
         else
         {
-            // echo "ghi";
             $this->result = $this
                 ->conn
                 ->query($this->query);
-                // echo $this->query;
         }
     }
 
@@ -91,9 +87,29 @@ class login
             ->fetch_assoc())
         {
             $this->json['sp'][$i]['ten'] = $row['Ten'];
-            $this->json['sp'][$i]['hinh'] = $row['Hinh'];
+            $this->json['sp'][$i]['soluong'] = $row['SoLuong'];
             $this->json['sp'][$i]['giaban'] = $row['GiaBan'];
-            $this->json['sp'][$i]['maloai'] = $row['MaLoai'];
+            $this->json['sp'][$i]['masp'] = $row['MaSP'];
+            $this->json['sp'][$i]['size'] = $row['Size'];
+            // var_dump($row);
+            $i++;
+        }
+    }
+
+    function collectDataHD()
+    {
+        $i = 0;
+        while ($row = $this
+            ->result
+            ->fetch_assoc())
+        {
+            $this->json['hd'][$i]['mahd'] = $row['MaHD'];
+            $this->json['hd'][$i]['tinhtrang'] = $row['TinhTrang'];
+            $this->json['hd'][$i]['ten'] = $row['Ten'];
+            $this->json['hd'][$i]['soluong'] = $row['SoLuong'];
+            $this->json['hd'][$i]['giaban'] = $row['GiaBan'];
+            $this->json['hd'][$i]['masp'] = $row['MaSP'];
+            $this->json['hd'][$i]['size'] = $row['Size'];
             // var_dump($row);
             $i++;
         }
@@ -115,25 +131,27 @@ class login
     {
         $_POST['pass'] = md5($_POST['pass']);
         $this->query = 'SELECT * FROM khachhang WHERE Email="'.$_POST['email'].'" AND MatKhau="'.$_POST['pass'].'" and tinhtrang=1';
-        // echo $this->query;
         $this->excuteQuery();
         $this->json['status'] = 0;
         if ($this->result != null)
         {
-            // echo "dang nhap";
             $this->json['status'] = 1;
-            // renderInfo($this->result,$this->json);
             $this->colectInfo();
 
-            $this->query = 'SELECT sanpham.* FROM khachhang,hoadon,chitiethd,sanpham WHERE email="' . $_POST['email'] . '" AND matkhau="' . $_POST['pass'] . '" AND khachhang.makh=hoadon.makh and hoadon.mahd=chitiethd.mahd and chitiethd.masp=sanpham.masp';
-            // echo $this->query;
+            $this->query = 'SELECT sanpham.*, chitiethd.* FROM khachhang,hoadon,chitiethd,sanpham WHERE email="' . $_POST['email'] . '" AND matkhau="' . $_POST['pass'] . '" AND khachhang.makh=hoadon.makh and hoadon.mahd=chitiethd.mahd and chitiethd.masp=sanpham.masp and hoadon.tinhtrang=0';
             $this->excuteQuery();
             if ($this->result != null)
             {
-            //     //lay data
-            //     // renderData($this->result,$this->json);
                 $this->collectData();
             }
+
+            $this->query = 'SELECT sanpham.*, chitiethd.*, hoadon.* FROM khachhang,hoadon,chitiethd,sanpham WHERE email="' . $_POST['email'] . '" AND matkhau="' . $_POST['pass'] . '" AND khachhang.makh=hoadon.makh and hoadon.mahd=chitiethd.mahd and chitiethd.masp=sanpham.masp and hoadon.tinhtrang>0';
+            $this->excuteQuery();
+            if ($this->result != null)
+            {
+                $this->collectDataHD();
+            }
+
             $_SESSION['loginData'] = $this->json;
             $_SESSION['statusLogin'] = 1;
             setcookie('login', json_encode($_POST) , time() + 54000, "/");
@@ -164,12 +182,20 @@ class login
                 $this->colectInfo();
                 $this->json['status'] = 1;
 
-                $this->query = 'SELECT sanpham.* FROM khachhang,hoadon,chitiethd,sanpham WHERE email="' . $this->obj['email'] . '" AND matkhau="' . $this->obj['pass'] . '" AND khachhang.makh=hoadon.mahd and hoadon.mahd=chitiethd.mahd and chitiethd.masp=sanpham.masp';
+                $this->query = 'SELECT sanpham.*, chitiethd.* FROM khachhang,hoadon,chitiethd,sanpham WHERE email="' . $this->obj['email'] . '" AND matkhau="' . $this->obj['pass'] . '" AND khachhang.makh=hoadon.makh and hoadon.mahd=chitiethd.mahd and chitiethd.masp=sanpham.masp and hoadon.tinhtrang=0';
+                // echo $this->query;
                 $this->excuteQuery();
 
                 if ($this->result != null)
                 {
                     $this->collectData();
+                }
+
+                $this->query = 'SELECT sanpham.*, chitiethd.*, hoadon.* FROM khachhang,hoadon,chitiethd,sanpham WHERE email="' . $this->obj['email'] . '" AND matkhau="' . $this->obj['pass'] . '" AND khachhang.makh=hoadon.makh and hoadon.mahd=chitiethd.mahd and chitiethd.masp=sanpham.masp and hoadon.tinhtrang>0';
+                $this->excuteQuery();
+                if ($this->result != null)
+                {
+                    $this->collectDataHD();
                 }
                 $_SESSION['loginData'] = $this->json;
                 $_SESSION['statusLogin'] = 1;

@@ -17,13 +17,15 @@
     <div class="container_all" style="width: 100%; position: absolute;">
         <div class="cart" style="width: 100%; height: 100%;" id="cart">
             <a class="closeCart" onclick="closeCart()" style="cursor: pointer;">×</a>
-            <h2>Your cart <i class="fas fa-shopping-cart"></i></h2>
-            <ul id="MyCart"></ul>
+            <h2 style="margin-left:0; font-size: 35px">Your cart <i class="fas fa-shopping-cart"></i></h2>
+            <table id="MyCart" class="table table-success table-striped"></table>
+            <div class="bottom_right" id="btr"></div>
         </div>
         <div class="order" style="width: 100%; height: 100%;" id="order">
             <a class="closeCart" onclick="closeOrder()" style="cursor: pointer;margin-top: -20px; color: black">×</a>
-            <h2 style="margin-top: 0%; color: black">Your order <i class="fas fa-clipboard-list"></i></h2>
-            <ul id="MyOrder" style="margin-left: 2%; margin-top: 1%; list-style-type: none;"></ul>
+            <h2 style="margin-left: 0%;color: #ff8c00;margin-top: 0%;font-size: 35px;">Your order <i class="fas fa-clipboard-list"></i></h2>
+            <!-- <ul id="MyOrder" style="margin-left: 2%; margin-top: 1%; list-style-type: none;"></ul> -->
+            <table id="MyOrder" class="table table-success table-striped"></table>
         </div>
         <div class="header" id="home" style="height: 100px">
             <div class="container">
@@ -161,7 +163,7 @@
                     require_once('../utils/connect_db.php');
                     ['findProductById' => $product] = require '../Entities/product.php';
                     $data = $product($conn,$idProduct);
-                    $res = '<div class="row2"><div class="col4v2" id="image" style="margin-right: -25%;"><img src="'.$data['Hinh'].'" style="width:140%"></div><div class="col4v2"><div class="info"><div id="productInfo"><h2>'.$data['Ten'].'</h2></div><p>'.number_format($data['GiaBan'], 0, '', '.').'VND</p></div><b>Description: </b><p> Unisex, comfortable for everyone in all age ranges, <br>make you warm in winter, cool in summer, one of the best sellers in our shop. </p><b>Size : </b><div><select id="size"><option>XS</option><option>S</option><option>M</option><option selected="">L</option><option>XL</option><option>XXL</option></select></div><b>Quantity: </b><div class="quantity"> <button class="quantitydown" onclick="quantitydown()">-</button> <input type="text" id="quantity" value="1"> <button class="quantityup" onclick="quantityup()">+</button></div><div id="atc" class="addToCart" style="cursor: pointer;"><a onclick="addToCart(this.id)" id="'.$data['MaSP'].'">add to cart</a></div></div></div></div>';
+                    $res = '<div class="row2"><div class="col4v2" id="image" style="margin-right: -25%;"><img src="'.$data['Hinh'].'" style="width:140%"></div><div class="col4v2"><div class="info"><div id="productInfo"><h2>'.$data['Ten'].'</h2></div><p id="'.$data['MaSP'].'p">'.$data['GiaBan'].' VND</p></div><b>Description: </b><p> Unisex, comfortable for everyone in all age ranges, <br>make you warm in winter, cool in summer, one of the best sellers in our shop. </p><b>Size : </b><div><select id="size"><option>XS</option><option>S</option><option>M</option><option selected="">L</option><option>XL</option><option>XXL</option></select></div><b>Quantity: </b><div class="quantity"> <button class="quantitydown" onclick="quantitydown()">-</button> <input type="text" id="quantity" value="1"> <button class="quantityup" onclick="quantityup()">+</button></div><div id="atc" class="addToCart" style="cursor: pointer;"><a onclick="addPHP(this.id)" id="'.$data['MaSP'].'">add to cart</a></div></div></div></div>';
                     $result = "<script>document.getElementById('all_products').innerHTML='".$res."'</script>";
                     echo($result);
                 }
@@ -243,6 +245,7 @@
     </div>
     <script src="../js/scripts.js"></script>
     <script src="../login/login.js"></script>
+    <script src="../shopping/index.js"></script>
 </body>
 
 </html>

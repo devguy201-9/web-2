@@ -4,6 +4,7 @@ html, body
     overflow-x: hidden;
     height: 100%;
 }
+
 body 
 {
     background: #fff;
@@ -285,7 +286,7 @@ input[type=checkbox]:checked ~ .sidebarIconToggle > .diagonal.part-2
 .addProduct:hover, .addAcc:hover
 {
     background: black;
-    color: #FF8C00;
+    color: #FF8C00 !important;
     text-decoration: none;
 }
 
@@ -303,28 +304,33 @@ input[type=checkbox]:checked ~ .sidebarIconToggle > .diagonal.part-2
 
 .row2
 {
-    display: flex;
+	display: flex;
     align-items: center;
     justify-content: space-around;
     flex-wrap: wrap;
-    margin-top: 20px;
+    margin-left: 7%;
+    margin-right: 7%;
+    margin-top: 3%;
+    margin-bottom: -3%;
 }
 
-.col-4
+
+.col4
+ 
 {
-    flex-basis: 20%;
+	flex-basis: 25%;
+    width: 200px;
     padding-top: 18px;
-    padding-left: 15px;
+    padding-left: 20px;
     margin-bottom: 50px;
-    margin-left: 20px;
     transition: transform 0.4s;
 }
-
-.col-4 img
+.col4 img
+ 
 {
-    transition: 0.4s;
-    box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.5);
-    width: 100%;
+	transition: 0.4s;
+	box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.5);
+	width: 100%;
 }
 
 .title
@@ -424,7 +430,7 @@ input[type=checkbox]:checked ~ .sidebarIconToggle > .diagonal.part-2
 {
     background: white;
     width: 360px;
-    height: 435px;
+    min-height: 435px;
     border: 5px solid orange;
     border-radius: 20px;
     position: relative;
@@ -442,11 +448,21 @@ h2
     color: #ff8c00;
 }
 
-#product_name, #id ,#price, #product_name1, #id1 ,#price1, 
+#product_name, #id ,#price, #product_name1, #id1 ,#price1,
 #user_name1, #email, #password1, #phoneNumber, #address, #quantity1, #type1, #type, #id2
 {
     width: 81%;
     height: 30px;
+    margin: 10px 0px;
+    padding: 0px 10px;
+    border-radius: 20px;
+    border: 3px solid orange;
+}
+
+.inputForm
+{
+    width: 81%;
+    height: 35px;
     margin: 10px 0px;
     padding: 0px 10px;
     border-radius: 20px;
@@ -603,7 +619,7 @@ a:hover{
 
 .btn2:hover
 {
-    color: #ff8c00;
+    color: #ff8c00 !important;
     background: black;
 }
 
@@ -648,7 +664,7 @@ canvas
 /*responsive for all*/
 @media only screen and (max-width: 1000px)
 {
-    .col-4
+    .col4
     {
         flex-basis: 50%;
         margin-top: 5%;
