@@ -252,7 +252,7 @@
                         </button>
                     </div>
                     <div class="modal-body" id="message-confirm">
-                        
+                    Are you sure you want to delete ?
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal"

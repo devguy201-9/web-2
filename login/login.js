@@ -71,7 +71,7 @@ function getStatus(str)
 
 function showOrderInfo(spArray)
 {
-    console.log("show" + spArray);
+    console.log("show " + spArray + " "+ spArray.length);
     var inSide = '<a class="closeCart" onclick="closeOrder()" style="cursor: pointer;margin-top: -20px; color: black">×</a><h2 style="margin-left: 0%;color: #ff8c00;margin-top: 0%;font-size: 35px;">Your order <i class="fas fa-clipboard-list"></i></h2>';
     var infoHD = "<div style='font-size: 23px;'>";
     var thead = '<table class="table table-success table-striped">' + "<thead><tr><th scope='col'>#</th><th scope='col'>Name</th><th scope='col'>Size</th><th scope='col'>Quantity</th><th scope='col'>Unit price</th></thead>";
@@ -83,6 +83,8 @@ function showOrderInfo(spArray)
         var info = "<tbody>";
         for (var i = 0; i < spArray.length; i++)
         {
+            // console.log("runnnnnnnnnn");
+            // console.log(spArray[0]["mahd"]);
             if (currentId.localeCompare(spArray[i]["mahd"]) == 0)
             {
                 info += "<tr id='" + spArray[i]["masp"] + "r'><th scope='row'>" + (parseInt(i) + 1) + "</th>" + "<td style='width: 400px;'>" + spArray[i]["ten"] + "</td>" + "<td id='" + spArray[i]["masp"] + "s'>" + spArray[i]["size"] + "</td>" + "<td id ='" + spArray[i]["masp"] + "q'>" + spArray[i]["soluong"] + "</td>" + "<td>" + spArray[i]["giaban"] + "</td>" + "</tr>";
@@ -91,7 +93,7 @@ function showOrderInfo(spArray)
             else if (currentId.localeCompare(spArray[i]["mahd"]) != 0)
             {
                 thead = thead + info + "</tbody></table>";
-                console.log("thread");
+                // console.log("thread\n", thead);
                 inSide += infoHD + "<br>Total: " + parseInt(total).toLocaleString('it-IT', {style : 'currency', currency : 'VND'}) + "<br>Status: " + getStatus(spArray[0]['tinhtrang']) + '</div>'+ thead + "<br>";
                 infoHD = "<div style='font-size: 23px;'>" + 'Bill ID: ' + spArray[i]["mahd"];
                 thead = '<table class="table table-success table-striped">' + "<thead><tr><th scope='col'>#</th><th scope='col'>Name</th><th scope='col'>Size</th><th scope='col'>Quantity</th><th scope='col'>Unit price</th></thead>";
@@ -101,10 +103,11 @@ function showOrderInfo(spArray)
                 info += "<tr id='" + spArray[i]["masp"] + "r'><th scope='row'>" + (parseInt(i) + 1) + "</th>" + "<td style='width: 400px;'>" + spArray[i]["ten"] + "</td>" + "<td id='" + spArray[i]["masp"] + "s'>" + spArray[i]["size"] + "</td>" + "<td id ='" + spArray[i]["masp"] + "q'>" + spArray[i]["soluong"] + "</td>" + "<td>" + spArray[i]["giaban"] + "</td>" + "</tr>";
                 total = parseInt(total) + parseInt(spArray[i]["soluong"])*parseInt(spArray[i]["giaban"]);
             }
-            else if (i == spArray.length - 1)
+            
+            if (parseInt(i) == parseInt(spArray.length - 1))
             {
-                console.log("thread");
                 thead = thead + info + "</tbody></table>";
+                // console.log("check 2\n", thead);
                 inSide += infoHD + "<br>Total: " + parseInt(total).toLocaleString('it-IT', {style : 'currency', currency : 'VND'}) + "<br>Status: " + getStatus(spArray[0]['tinhtrang']) + '</div>'+ thead;
             }
         }
@@ -122,7 +125,7 @@ function openCart()
 
 function yourOrder()
 {
-    console.log(document.getElementById("MenuItems").style.maxHeight);
+    // console.log(document.getElementById("MenuItems").style.maxHeight);
    if (!((document.getElementById("MenuItems").style.maxHeight).localeCompare("0px") == 0))
         menutoggle();
     document.getElementById('order').style.top = "0%";
@@ -137,7 +140,7 @@ function checkCookie(){
             response=JSON.parse(xml.responseText);
             // console.log(response);
             if(response['status']==1){
-                console.log("not run");
+                // console.log("not run");
                 
                 showCartInfo(response['sp']);
                 showOrderInfo(response['hd']);

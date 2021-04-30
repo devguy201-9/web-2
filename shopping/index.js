@@ -9,11 +9,11 @@ function collectData(idSP){
 }
 function addPHP(idSP){
     var data=collectData(idSP);
-    console.log(data);
+    // console.log(data);
     var xml=new XMLHttpRequest();
     xml.onreadystatechange=function(){
         if(xml.readyState==4&&xml.status==200){
-            console.log("cart\n", xml.responseText);
+            // console.log("cart\n", xml.responseText);
             response=JSON.parse(xml.responseText);
             if(response['status']==1)
                 alert("Adding this product to your cart, successfully");
@@ -30,7 +30,7 @@ function orderPHP(){
     var xml=new XMLHttpRequest();
     xml.onreadystatechange=function(){
         if(xml.readyState==4&&xml.status==200){
-            console.log(xml.responseText);
+            // console.log(xml.responseText);
             checkCookie();
         }
     }
@@ -48,11 +48,11 @@ function deletePHP(idSP){
         data['size'] = document.getElementById(idSP + "s").innerText;
         data['email']=document.getElementById("userName").getAttribute("thongtin");
         document.getElementById(idSP + 'r').style.display = "none";
-        console.log(data);
+        // console.log(data);
         var xml=new XMLHttpRequest();
         xml.onreadystatechange=function(){
             if(xml.readyState==4&&xml.status==200){
-                console.log('Xoa san pham\n' + xml.responseText);
+                // console.log('Xoa san pham\n' + xml.responseText);
                 checkCookie();
             }
         }
