@@ -31,7 +31,7 @@
             <div class="container">
                 <div class="navbar">
                     <div class="logo">
-                        <a href="home.php">
+                        <a href="index.php">
                             <img src="..\image\logo420.png" width="380px">
                         </a>
                     </div>
@@ -97,7 +97,7 @@
                     </script>
                     <nav>
                         <ul id="MenuItems">
-                            <li><a id="home-page" href="home.php" style="text-decoration: none;">HOME</a>
+                            <li><a id="home-page" href="index.php" style="text-decoration: none;">HOME</a>
 							</li>
                             <li><a title="shopping cart" onclick="openCart()"><i style="width: 80%;"
                                         class="fas fa-shopping-cart"></i></a></li>
@@ -134,7 +134,7 @@
                                     <input type="text" placeholder="User name" id="user_name">
                                     <input type="password" placeholder="Password" id="password">
                                     <a class="btn" onclick="loginPHP()">Log in</a>
-                                    <a onclick="forgotPW()" style="cursor: pointer;">Forgot password |</a>
+                                    <!-- <a onclick="forgotPW()" style="cursor: pointer;">Forgot password |</a> -->
                                     <a onclick="close_login_reg_form()" style="cursor: pointer;">| Cancel</a>
                                 </form>
 

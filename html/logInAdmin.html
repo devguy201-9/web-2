@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Admin page</title>
+	<meta charset="UTF-8">
+    <title>E COMMERCE</title>
+    <link href="https://fonts.googleapis.com/css2?family=Alata&display=swap" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js"></script>
+    <script src="../js/jquery.twbsPagination.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css"
+	integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+    <link rel="stylesheet" href="..\css\style.css">
+</head>
+<body style="background: #2f4f4f">
+	<div class="login-page" id="account" style="display:block">
+        <div class="container">
+            <div class="row" style="height:1000px">
+                <div class="col3">
+                    <div class="form-container" style="top: -114px; height: 270px">
+                        <div class="form-btn">
+                            <span onclick="Login()">Log in</span>
+                            <hr id="indicator1">
+                        </div>
+
+                        <form id="login" style="left:0;">
+                            <input type="text" placeholder="User name" id="user_name">
+                            <input type="password" placeholder="Password" id="password">
+                            <a class="btn" onclick="loginPHP()">Log in</a>
+                        </form>
+
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+	
+	<script src="../login/loginAdmin.js"></script>
+</body>
+</html>

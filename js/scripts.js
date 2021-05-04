@@ -51,7 +51,7 @@ function AccountOn()
 		let call = sessionStorage.getItem("call");
 		if (call == "true") {
 			sessionStorage.setItem("call", "false");
-			menutoggle()
+			menutoggle();
 			document.getElementById("home").style.height = "100px";
 			document.getElementById("account").style.display = "none"; 
 			document.getElementById("Endorser").style.display = "none";

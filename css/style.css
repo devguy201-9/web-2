@@ -580,6 +580,17 @@ form .btn:focus
 	transition: transform 1s;
 }
 
+#indicator1
+{
+	width: 100px;
+	height: 3px;
+	border: none;
+	background: #FF8C00;
+	margin-top: 12px;
+	/*transform: translateX(100px);*/
+	transition: transform 1s;
+}
+
 #account
 {
 	display: none;

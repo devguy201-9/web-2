@@ -34,7 +34,7 @@
             <div class="container">
                 <div class="navbar">
                     <div class="logo">
-                        <a href="home.php">
+                        <a href="index.php">
                             <img src="..\image\logo420.png" width="390px">
                         </a>
                     </div>
@@ -157,7 +157,7 @@
                                     <input type="text" placeholder="Email" id="user_name">
                                     <input type="password" placeholder="Password" id="password">
                                     <a class="btn" onclick="loginPHP()">Log in</a>
-                                    <a onclick="forgotPW()" style="cursor: pointer;">Forgot password |</a>
+                                    <!-- <a onclick="forgotPW()" style="cursor: pointer;">Forgot password |</a> -->
                                     <a onclick="close_login_reg_form()" style="cursor: pointer;">| Cancel</a>
                                 </form>
 

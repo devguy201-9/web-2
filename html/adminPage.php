@@ -24,7 +24,7 @@
             <ul id="detail"></ul>
         </div>
         <div class="logo">
-            <a href="home.php">
+            <a>
                 <img src="..\image\logo420.png" width="300px" id="logo">
             </a>
         </div>
@@ -49,7 +49,7 @@
 	<div id='center' class="main_center">
         <ul id="client_bill"></ul>
     </div>
-    <div id="container-data-bill" style="margin-left: 270px;margin-top: 50px;">
+    <div id="container-data-bill" style="margin-left: 24%;margin-top: 50px;">
         <form action="" method="GET" id="BillFormGroup">
             <select id="statusBills" name="status" class="custom-select mb-3" style="width: 200px;"
                 onchange="ClickBtnBill()">
@@ -77,7 +77,7 @@
             <select id="yearBills" name="year" class="custom-select mb-3" style="width: 280px;"
                 onchange="ClickBtnBill()">
             </select>
-            <button class="btn btn-warning" onclick="funcAllBills()" style="cursor: pointer; margin-left: 20px;">All
+            <button class="btn btn-warning" onclick="funcAllBills()" style="cursor: pointer; margin-left: 20px;margin-top: -1.5%;">All
                 Bills</button>
             <input type="submit" name="submit" value="Submit-Bill" id="btnSubmitBill"
                 style="visibility: hidden; opacity: 0;" />
@@ -158,7 +158,7 @@
         <!-- Modal -->
     </div>
 	<div id="chart-product">
-		<form action="" method="GET" id="ChartFormGroup" style="margin-left: 270px; margin-top: 30px">
+		<form action="" method="GET" id="ChartFormGroup" style="margin-left: 24%; margin-top: 30px">
             <select id="monthBills2" name="month" class="custom-select mb-3" style="width: 280px;"
                 onchange="ClickBtnBill2()">
                 <option selected value='0'>>--Select Month--< </option>
@@ -189,7 +189,7 @@
 		</div>
 	</div>
 
-    <div id="container-data-product" style="margin-left: 270px;margin-top: 50px;">
+    <div id="container-data-product" style="margin-left: 24%;margin-top: 50px;">
         <form action="" method="GET" id="ProductFormGroup">
             <select id="typeProductBill" name="typeProductBill" class="custom-select mb-3" style="width: 200px;"
                 onchange="ClickBtnBill3()">
@@ -278,15 +278,15 @@
         </form>
         <div class="form-container" id="addProductForm">
             <a class="closeDetail2" onclick="closeDetail()" style="cursor: pointer;color: #ff8c00;">×</a>
-            <form action="" method="POST" id="formAddOrUpdateProduct">
+            <form action="" method="POST" id="formAddOrUpdateProduct" enctype="multipart/form-data">
                 <h2 id="title-AddOrUp">UPDATE PRODUCT</h2>
-                <input type="text" class="inputForm" placeholder="Product name" id="product-name" name="product-name">
-                <input type="text" class="inputForm" placeholder="Price" id="product-price" name="product-price">
-                <input type="text" class="inputForm" placeholder="Quantity in stock" id="quantity-in-stock" name="quantity-in-stock">
+                <input type="text" class="inputForm" placeholder="Product name" id="product-name" name="productName" required>
+                <input type="number" min="1" class="inputForm" placeholder="Price" id="product-price" name="productPrice" required>
+                <input type="number" min="1" class="inputForm" placeholder="Quantity in stock" id="quantity-in-stock" name="quantityInStock" required>
                 <select class="inputForm" id="updateType" name="updateType">
                 </select>
                 <p style="margin-top: -4px; margin-bottom: -4px">Product image:</p>
-                <input type="file" class="inputForm" placeholder="Image" id="product-image" name="product-image">
+                <input type="file" class="inputForm" placeholder="Image" id="product-image" name="productImage">
                 <button class="btn2" id="btnAddOrUpdate" onclick="() => {document.getElementById('btnAddOrUpdateProduct').click();}" style="width: 64%;margin-left: 5%;">Update</button>
                 <input type="hidden" name="idAddOrUpdateProd" id="idAddOrUpdateProd">
                 <input type="submit" name="submitProduct" value="Submit-Product" id="btnAddOrUpdateProduct" style="visibility: hidden; opacity: 0;" />
@@ -326,6 +326,7 @@
         </div>
     </div>
     <script src="../js/scripts.js"></script>
+    <script src="../login/loginAdmin.js"></script>
     <script src="../js/script.js"></script>
 	<script>
         $(document).ready(function() {
@@ -412,19 +413,28 @@
 
             $("#formAddOrUpdateProduct").submit(function(event) {
                 event.preventDefault(); //prevent default action 
-                $.post("../thuan/productsManager.php", {
-                    idAddOrUpdateProd: $("#idAddOrUpdateProd").val(),
-                    productName: $("#product-name").val(),
-                    productPrice: $("#product-price").val(),
-                    quantityInStock: $("#quantity-in-stock").val(),
-                    updateType: $("#updateType").val(),
-                    // productImage: $("#product-image").val(),
-                }, function(data) {
-                    $("#action-result").html(data);
-                    searchProduct();
-                });
-            });
+                var fd = new FormData();
+                var files = $('#product-image')[0].files;
+                fd.append('productImage',files[0]);
+                fd.append('idAddOrUpdateProd',$("#idAddOrUpdateProd").val());
+                fd.append('productName',$("#product-name").val());
+                fd.append('productPrice',$("#product-price").val());
+                fd.append('quantityInStock',$("#quantity-in-stock").val());
+                fd.append('updateType',$("#updateType").val());
 
+                $.ajax({
+                    url: "../thuan/productsManager.php",
+                    type: 'POST',
+                    data: fd,
+                    contentType: false,
+                    processData: false,
+                    success: function(response){
+                        $("#action-result").html(response);
+                        searchProduct();
+                    },
+                });
+
+            });
         });
         </script>
 </body>

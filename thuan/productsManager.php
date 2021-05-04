@@ -33,8 +33,7 @@
             }
             $res = $res . "<script> document.getElementById('addProductForm').style.top = \"15%\";document.getElementById('addProductForm').style.height = \"393px\";"
             ."document.getElementById('product-name').value='".$product['Ten']."';document.getElementById('product-price').value='".$product['GiaBan']."';document.getElementById('quantity-in-stock').value='"
-            .$product['SoLuongTon']."';document.getElementById('updateType').innerHTML='".$selectType."';document.getElementById(\"idAddOrUpdateProd\").value = '".$product['MaSP']."'; searchProduct();</script>";
-            //document.getElementById('product-image').value='".$product['Hinh']."';
+            .$product['SoLuongTon']."';document.getElementById('product-image').value='';document.getElementById('updateType').innerHTML='".$selectType."';document.getElementById(\"idAddOrUpdateProd\").value = '".$product['MaSP']."'; searchProduct();</script>";
         } else if($typeActionProd == "create") {
             $selectType = "";
             ['findAllTypes' => $arrayType] = require '../Entities/category.php';
@@ -44,8 +43,7 @@
             }
             $res = $res . "<script> document.getElementById('addProductForm').style.top = \"15%\";document.getElementById('addProductForm').style.height = \"393px\";
             document.getElementById('updateType').innerHTML='".$selectType."'; document.getElementById('title-AddOrUp').innerHTML=\"CREATE PRODUCT\";document.getElementById('btnAddOrUpdate').innerHTML=\"CREATE\"; ".
-            " document.getElementById('product-name').value='';document.getElementById('product-price').value='';document.getElementById('quantity-in-stock').value='';document.getElementById(\"idAddOrUpdateProd\").value=''; </script>";
-            //document.getElementById('product-image').value='';
+            " document.getElementById('product-name').value='';document.getElementById('product-image').value='';document.getElementById('product-price').value='';document.getElementById('quantity-in-stock').value='';document.getElementById(\"idAddOrUpdateProd\").value=''; </script>";
         }
     }
 
@@ -55,8 +53,34 @@
         $price = $_POST["productPrice"];
         $quantity = $_POST["quantityInStock"];
         $type = $_POST["updateType"];
-        // $image = $_POST["productImage"];
-        $image = "hinhabc";
+        $image = "";
+
+        //upload file
+        $file = $_FILES['productImage'];
+
+        $fileName = $_FILES['productImage']['name'];
+        $fileTmpName = $_FILES['productImage']['tmp_name'];
+        $fileSize = $_FILES['productImage']['size'];
+        $fileError = $_FILES['productImage']['error'];
+        $fileType = $_FILES['productImage']['type'];
+        
+        $fileExt = explode('.',$fileName);
+        $fileActualExt = strtolower(end($fileExt));
+        $allowed = array('jpg','jpeg','png','pdf');
+
+        if (in_array($fileActualExt,$allowed)) {
+            if ($fileError === 0){
+                $fileNameNew = uniqid('',true).".".$fileActualExt;
+                $fileDestination = '../image/'.$fileNameNew;
+                $image = $image . "../image/".$fileNameNew;
+                move_uploaded_file($fileTmpName, $fileDestination);
+            } else {
+                echo "There was an error uploading your file!";
+            }
+        } else {
+            echo "You cannot upload file of this type !";
+        }
+        
         if(!empty($id)) {
             ['updateProduct' => $func] = require '../Entities/product.php';
             $productUpdate = $func($conn,array($name,$price,$type,$quantity,$image),$id);
