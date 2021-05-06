@@ -98,9 +98,11 @@
             return $data;
         },
         'updateProduct' => function($conn,$products,$id) {
-            $query ="UPDATE sanpham SET Ten = '".$products[0]."',Hinh = '".$products[4]."',GiaBan = "
-            .$products[1].",MaLoai = ".$products[2].",SoLuongTon = ".$products[3]
-            ." WHERE MaSP = ".$id;
+            $query ="UPDATE sanpham SET Ten = '".$products[0]."'";
+            if(empty($products[4])){
+                $query = $query . ",Hinh = '".$products[4]."'";
+            }
+            $query = $query . ",GiaBan = ".$products[1].",MaLoai = ".$products[2].",SoLuongTon = ".$products[3]." WHERE MaSP = ".$id;
             $result = mysqli_query($conn,$query);
             if(!$result) {
                 return false;
