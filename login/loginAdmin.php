@@ -14,6 +14,22 @@ class loginAdmin
         $this->connectDB();
     }
 
+    function collectDataNV()
+    {
+        $i = 0;
+        while ($row = $this
+            ->result
+            ->fetch_assoc())
+        {
+            $this->json['sp'][$i]['ten'] = $row['Ten'];
+            $this->json['sp'][$i]['soluong'] = $row['SoLuong'];
+            $this->json['sp'][$i]['giaban'] = $row['GiaBan'];
+            $this->json['sp'][$i]['masp'] = $row['MaSP'];
+            $this->json['sp'][$i]['size'] = $row['Size'];
+            $i++;
+        }
+    }
+
     function connectDB()
     {
         $this->conn = new mysqli('localhost', 'root', '', 'ecommerce');
@@ -67,6 +83,9 @@ class loginAdmin
             case 2:
                 $this->checkForm();
             break;
+            case 3:
+                $this->logout();
+            break;
             default:
             break;
         }
@@ -80,6 +99,7 @@ class loginAdmin
             ->fetch_assoc())
         {
             $this->json['thongtin']['name'] = $row['Ten'];
+            $this->json['thongtin']['email'] = $row['Email'];
             $this->json['thongtin']['maCh'] = $row['MaCh'];
         }
     }
@@ -104,9 +124,9 @@ class loginAdmin
     {
         setcookie("login", "", time() - 3600, "/");
         session_destroy();
-        $this->json['status'] = 1;
-        
+        $this->json['status'] = 1;    
     }
+
     function checkCookie()
     {
         // echo "run";

@@ -415,7 +415,6 @@ function display(a)
 	if (a.length == 1)
 	{
 		var temp = '<div class = "col4"' + 'id="' + product_info[a[0]].id + '">' + '<img src="' + product_info[a[0]].img + '">' + '<h4>' + product_info[a[0]].name +'</h4>' + '<div class="rating"><span>&#9733</span><span>&#9733</span><span>&#9733</span><span>&#9733</span><span>&#9733</span></div>' + '<p>' + product_info[a[0]].price.toLocaleString('it-IT', {style : 'currency', currency : 'VND'}) + '</p>' + '<button class="DetailBtn"' + 'id="' + product_info[a[0]].id + '" onclick="showProductDetail(this.id)">Details</button>' + '</div>';
-// >>>>>>> 065b4a2... tai thang Thuan
 		temp = '<div class ="row2">' + temp + '</div>';
 		document.getElementById("search_result").innerHTML = temp;
 	}

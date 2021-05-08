@@ -125,6 +125,7 @@ class login
             $this->json['thongtin']['email'] = $row['Email'];
             $this->json['thongtin']['diaChi'] = $row['DiaChi'];
             $this->json['thongtin']['sdt'] = $row['SDT'];
+            // $this->json['thongtin']['mach'] = '0';
         }
     }
     function checkForm()

@@ -84,12 +84,12 @@
                             sessionStorage.setItem("search_type", $("#search_type").val());
                             sessionStorage.setItem("product_type", $("#product_type").val());
                             // console.log(form_data);
-                            $.get("../thuan/searchsp.php", { txtSearch:$("#input").val(), priceValue:$("#search_type").val(), typeId:$("#product_type").val()}, function(data){
+                            $.get("../PHP/searchsp.php", { txtSearch:$("#input").val(), priceValue:$("#search_type").val(), typeId:$("#product_type").val()}, function(data){
                                 $("#search_result").html(data);
                                 openNav();
                             });
                         });
-                        $.get("../thuan/loadbestprod.php", { }, function(data){
+                        $.get("../PHP/loadbestprod.php", { }, function(data){
                             $("#load-best-prod").html(data);
                         });
 

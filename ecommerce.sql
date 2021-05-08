@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 04, 2021 at 04:48 AM
+-- Generation Time: May 08, 2021 at 04:41 AM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 7.4.15
 
@@ -83,9 +83,9 @@ CREATE TABLE `hoadon` (
 --
 
 INSERT INTO `hoadon` (`MaHD`, `NGAYXUAT`, `MaKH`, `TinhTrang`, `ThanhTien`) VALUES
-(32, '2021-04-29 19:36:32', 10, 1, 8400000),
-(33, '2021-04-29 19:46:04', 10, 1, 4000000),
-(34, '2021-05-04 09:11:00', 10, 1, 1120000),
+(32, '2021-04-29 19:36:32', 10, 2, 8400000),
+(33, '2021-04-29 19:46:04', 10, 2, 4000000),
+(34, '2021-05-04 09:11:00', 10, 2, 1120000),
 (35, NULL, 10, 0, NULL);
 
 -- --------------------------------------------------------
@@ -111,12 +111,12 @@ CREATE TABLE `khachhang` (
 INSERT INTO `khachhang` (`MaKH`, `Ten`, `DiaChi`, `Email`, `SDT`, `MatKhau`, `TinhTrang`) VALUES
 (1, 'Nguyen Le Huy Thang', '456/17 pth', 'nguyenlehuythang@gmail.com', '0901407894', '25d55ad283aa400af464c76d713c07ad', 1),
 (4, 'Sang Vũ Trụ', 'Tân Phú', 'sang@gmail.com', '0901407894', '99f7dce285bb3f9b3c4517afc3038cc5', 1),
-(5, 'Chôm Chỉa', 'Tân Phú', 'chom@gmail.com', '0901407894', '441402dd8cf8d006df5e7cce84c19ec6', 1),
+(5, 'Chôm Chỉa', 'Tân Phú', 'chom@gmail.com', '0901407894', '441402dd8cf8d006df5e7cce84c19ec6', 0),
 (6, 'Chôm Chỉa', 'Tân Phú', 'choch@gmail.com', '0901407894', '441402dd8cf8d006df5e7cce84c19ec6', 1),
 (7, 'Sang Vũ Trụ', 'Tân Phú', 'vubu@gmail.com', '0901407894', '441402dd8cf8d006df5e7cce84c19ec6', 1),
 (8, 'Sang Vũ Trụ', 'Tân Phú', 'vutru@gmail.com', '0901407894', 'd458278448fec8ed1cf23283543ab354', 1),
 (9, 'Ka ka Ka', '456/17 Tan Phú', 'ka@gmail.com', '0123456789', '25d55ad283aa400af464c76d713c07ad', 1),
-(10, 'Nguyễn Xuân Cảnh', 'Tân Phú', 'canh@gmail.com', '0901407894', 'd458278448fec8ed1cf23283543ab354', 1);
+(10, 'Nguyễn Xuân Cảnh', 'Tân Phú', 'canh@gmail.com', '0901407894', 'd458278448fec8ed1cf23283543ab354', 0);
 
 -- --------------------------------------------------------
 
@@ -158,7 +158,8 @@ CREATE TABLE `nhanvien` (
 --
 
 INSERT INTO `nhanvien` (`MaNV`, `Email`, `Ten`, `MaCh`, `DiaChi`, `Password`, `TinhTrang`) VALUES
-(1, 'nguyenlehuythang@gmail.com', 'Nguyễn Lê Huy Thắng', 1, '456/17 Tan Phú', '25f9e794323b453885f5181f1b624d0b', 1);
+(1, 'nguyenlehuythang@gmail.com', 'Nguyễn Lê Huy Thắng', 1, '456/17 Tan Phú', '25f9e794323b453885f5181f1b624d0b', 1),
+(3, 'anh@gmail.com', 'Nguyễn Lê Anh', 2, 'Tân Phú', '1fc8609bf93eff4ce3767f43bed66053', 1);
 
 -- --------------------------------------------------------
 
@@ -349,7 +350,7 @@ ALTER TABLE `loai`
 -- AUTO_INCREMENT for table `nhanvien`
 --
 ALTER TABLE `nhanvien`
-  MODIFY `MaNV` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `MaNV` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `sanpham`

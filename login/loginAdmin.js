@@ -3,11 +3,24 @@ function renderInfo(){
     console.log(1);
 }
 
-function loadPage(name)
+function loadPage(name, mach)
 {
     document.getElementById('addProductForm').style.top = "-300%";
+    if (mach == "1")
+        document.getElementById("admin").innerHTML = '<i class="fas fa-sign-out-alt" onclick="log()"></i>' + name + "<span>Manager</span> ";
+    else
+        document.getElementById("admin").innerHTML = '<i class="fas fa-sign-out-alt" onclick="log()"></i>' + name + "<span>Saleman</span> ";
     showBill();
-    document.getElementById("admin").innerHTML = name + "<span>Co-founder and owner</span>"
+}
+
+function openManageAccForm()
+{
+    document.getElementById('manageAccount').style.width = "100%"; 
+    document.getElementById('input2').value = ""; 
+    closeSideBar();
+    closeDetail();
+    var stored_accounts = JSON.parse(localStorage.getItem('user_info'));
+    search2();
 }
 
 function checkCookie(){
@@ -23,17 +36,22 @@ function checkCookie(){
                 if ((window.location.href).split("/")[((window.location.href).split("/")).length-1] === "logInAdmin.html")
                 {
                     window.location.replace((window.location.href).split("/").slice(0, -1).join("/") + "/adminPage.php");
-                    // window.location.href.replace(window.location.search,'');
                 }
                 else
                 {
                     let n = response['thongtin']['name'].replace(/[\[\]?.,\/#!$%\^&\*;:{}=\\|_~()]/g, "").split(" ");
-                    loadPage(n[n.length - 1]);
+                    loadPage(n[n.length - 1], response['thongtin']['maCh']);
+                    if (response['thongtin']['maCh'] == "1")
+                        localStorage.setItem("admin", response['thongtin']['email']);
+                    else 
+                    {
+                        document.getElementById('ffa').style.display = "none";
+                    }
                 }
             }
 
             else{
-                if(response['status']==-1)
+                if(response['status']==-1 || response['status']==0)
                 {
                     console.log("hahahaha");
                      if ((window.location.href).split("/")[((window.location.href).split("/")).length-1] !== "logInAdmin.html")
@@ -83,7 +101,7 @@ function log(){
 
             if(response['status']==1)
             {
-                alert("Log out successfully");
+                window.location.replace((window.location.href).split("/").slice(0, -1).join("/") + "/logInAdmin.html");
             }
             else
                 alert("Log out unsuccessfully");

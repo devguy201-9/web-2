@@ -356,6 +356,7 @@ function getProductName(id)
 
 function openDelForm()
 {
+	document.getElementById('inputSearch').value='';
 	searchProduct();
 	document.getElementById('deleteProForm').style.width = "100%"; 
 	closeSideBar();
@@ -427,68 +428,45 @@ function resetButton(user)
 	return " ";
 }
 
+// function search2()
+// {
+// 	var input = document.getElementById("input2").value.toLowerCase();
+// 	if (input === "")
+// 		openManageAccForm();
+// 	else 
+// 	{
+// 		var stored_accounts = JSON.parse(localStorage.getItem('user_info'));
+// 		var flag = false;
+// 		var temp = '', c = 0, result = '';
+// 		for (var j = 0; j < stored_accounts.length; j++)
+// 		{
+// 			if (stored_accounts[j].name.toLowerCase().indexOf(input) != -1)
+// 			{
+// 				console.log("run12");
+// 				temp += '<div class="col-4" style="border: 3px solid #ff8c00"><h4 style="font-size: 20px; margin-top:2%">' + stored_accounts[j].name + '</h4><p style="margin-top: -21px; margin-bottom: -10px">Phone number: ' + stored_accounts[j].phoneNumber + '</p><p style="margin-bottom: -10px">Address: ' + stored_accounts[j].address + '</p><p style="margin-bottom: -10px">Email: ' + stored_accounts[j].email + '</p><p id="AccState' + stored_accounts[j].name + '">State: ' + isBlocked(stored_accounts[j].isBlocked) + '</p>'+ getButton(stored_accounts[j]) + '<button id="' + stored_accounts[j].name + '"class="btn2" onclick="deleteAcc(this.id)">Delete</button>' + '<button id="' + stored_accounts[j].name + '"class="btn2" onclick="openForm3(this.id)">Edit</button>' + resetButton(stored_accounts[j]) + '</div>';
+// 				c += 1;
+// 				if (c == 4 || j == stored_accounts.length - 1)
+// 				{
+// 					temp = '<div class="row2">' + temp + '</div>';
+// 					result += temp;
+// 					temp = "";
+// 					c = 0;
+// 					flag = true;
+// 				}
+// 			}
+// 		}
+			
+// 		if (flag == false)
+// 			result = '<div class="row2">' + temp + '</div>';
+// 		document.getElementById('search_result1').innerHTML = result;
+// 	}
+// 	console.log("run12356");
+
+// }
+
 function search2()
 {
-	var input = document.getElementById("input2").value.toLowerCase();
-	if (input === "")
-		openManageAccForm();
-	else 
-	{
-		var stored_accounts = JSON.parse(localStorage.getItem('user_info'));
-		var flag = false;
-		var temp = '', c = 0, result = '';
-		for (var j = 0; j < stored_accounts.length; j++)
-		{
-			if (stored_accounts[j].name.toLowerCase().indexOf(input) != -1)
-			{
-				console.log("run12");
-				temp += '<div class="col-4" style="border: 3px solid #ff8c00"><h4 style="font-size: 20px; margin-top:2%">' + stored_accounts[j].name + '</h4><p style="margin-top: -21px; margin-bottom: -10px">Phone number: ' + stored_accounts[j].phoneNumber + '</p><p style="margin-bottom: -10px">Address: ' + stored_accounts[j].address + '</p><p style="margin-bottom: -10px">Email: ' + stored_accounts[j].email + '</p><p id="AccState' + stored_accounts[j].name + '">State: ' + isBlocked(stored_accounts[j].isBlocked) + '</p>'+ getButton(stored_accounts[j]) + '<button id="' + stored_accounts[j].name + '"class="btn2" onclick="deleteAcc(this.id)">Delete</button>' + '<button id="' + stored_accounts[j].name + '"class="btn2" onclick="openForm3(this.id)">Edit</button>' + resetButton(stored_accounts[j]) + '</div>';
-				c += 1;
-				if (c == 4 || j == stored_accounts.length - 1)
-				{
-					temp = '<div class="row2">' + temp + '</div>';
-					result += temp;
-					temp = "";
-					c = 0;
-					flag = true;
-				}
-			}
-		}
-			
-		if (flag == false)
-			result = '<div class="row2">' + temp + '</div>';
-		document.getElementById('search_result1').innerHTML = result;
-	}
-	console.log("run12356");
-
-}
-
-function openManageAccForm()
-{
-	document.getElementById('manageAccount').style.width = "100%"; 
-	closeSideBar();
-	closeDetail();
-	var stored_accounts = JSON.parse(localStorage.getItem('user_info'));
-	var flag = false;
-	var temp = '', c = 0, result = '';
-	for (var j = 0; j < stored_accounts.length; j++)
-	{
-		temp += '<div class="col-4" style="border: 3px solid #ff8c00"><h4 style="font-size: 20px; margin-top:2%">' + stored_accounts[j].name + '</h4><p style="margin-top: -21px; margin-bottom: -10px">Phone number: ' + stored_accounts[j].phoneNumber + '</p><p style="margin-bottom: -10px">Address: ' + stored_accounts[j].address + '</p><p style="margin-bottom: -10px">Email: ' + stored_accounts[j].email + '</p><p id="AccState' + stored_accounts[j].name + '">State: ' + isBlocked(stored_accounts[j].isBlocked) + '</p>'+ getButton(stored_accounts[j]) + '<button id="' + stored_accounts[j].name + '"class="btn2" onclick="deleteAcc(this.id)">Delete</button>' + '<button id="' + stored_accounts[j].name + '"class="btn2" onclick="openForm3(this.id)">Edit</button>' + resetButton(stored_accounts[j]) + '</div>';
-		c += 1;
-		if (c == 4 || j == stored_accounts.length - 1)
-		{
-			temp = '<div class="row2">' + temp + '</div>';
-			result += temp;
-			temp = "";
-			c = 0;
-			flag = true;
-		}
-	}
-		
-	if (flag == false)
-		result = '<div class="row2">' + temp + '</div>';
-		//console.log(result);
-	document.getElementById('search_result1').innerHTML = result;
+	document.getElementById("submitSearchUser").click();
 }
 
 function closeDelForm()
@@ -497,8 +475,6 @@ function closeDelForm()
 	document.getElementById('manageAccount').style.width = "0%"; 
 	closeDetail();
 	document.getElementById('kind').value='idProduct';
-	document.getElementById('inputSearch').value='';
-	document.getElementById('search_result').innerHTML='';
 	closeAddForm();
 }
 
@@ -697,45 +673,11 @@ function closeAddForm()
 	document.getElementById("password1").value = null;
 	document.getElementById("user_name1").value = null;
 	document.getElementById("email").value = null;
-	document.getElementById("phoneNumber").value = null;
+	// document.getElementById("phoneNumber").value = null;
 	document.getElementById("address").value = null;
 }
 
-function openForm2()
-{
-	closeSideBar();
-	closeDetail();
-	document.getElementById('addAccount').style.top = '15%';
-	document.getElementById("formName").innerHTML = "ADD ACCOUNT";
-	document.getElementById("add").style.display = "block";
-	document.getElementById("save").style.display = "none";
-	document.getElementById("priority").innerHTML = '<option>User</option><option>Admin</option>';
-}
 
-function openForm3(name)
-{
-	closeSideBar();
-	closeDetail();
-	document.getElementById('addAccount').style.top = '15%';
-	document.getElementById("formName").innerHTML = "EDIT ACCOUNT";
-	document.getElementById("save").style.display = "block";
-	document.getElementById("add").style.display = "none";
-	var stored_accounts = JSON.parse(localStorage.getItem('user_info'));
-	for (var i = 0; i < stored_accounts.length; i++)
-		if (name == stored_accounts[i].name)
-		{
-			document.getElementById("user_name1").value = stored_accounts[i].name;
-			document.getElementById("email").value = stored_accounts[i].email;
-			document.getElementById("password1").value = stored_accounts[i].password;
-			document.getElementById("phoneNumber").value = stored_accounts[i].phoneNumber;
-			document.getElementById("address").value = stored_accounts[i].address;
-			if (checkAdmin(name) == 1)
-				document.getElementById("priority").innerHTML = '<option>Admin</option><option>User</option>';
-			else document.getElementById("priority").innerHTML = '<option>User</option><option>Admin</option>';
-			localStorage.setItem('current_name', stored_accounts[i].name);
-			break;
-		}
-}
 
 function getInfo1()
 {
